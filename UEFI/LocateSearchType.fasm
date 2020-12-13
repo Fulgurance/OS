@@ -1,0 +1,8 @@
+struc LocateSearchType
+{
+    .AllHandles         Index
+    .ByRegisterNotify   Index
+    .ByProtocol         Index
+}
+
+IndexTable LocateSearchType

@@ -1,0 +1,18 @@
+struc SystemTable
+{
+    .Hdr                        TableHeader
+    .FirmwareVendor             Integer64
+    .FirmwareRevision           Integer32
+    .ConsoleInHandle            Integer64
+    .ConIn                      Integer64
+    .ConsoleOutHandle           Integer64
+    .ConOut                     Integer64
+    .StandardErrorHandle        Integer64
+    .StdErr                     Integer64
+    .RuntimeServices            Integer64
+    .BootServices               Integer64
+    .NumberOfTableEntries       Integer64
+    .ConfigurationTable         Integer64
+}
+
+Table SystemTable

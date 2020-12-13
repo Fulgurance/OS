@@ -1,0 +1,10 @@
+struc TableHeader
+{
+    .Signature     Integer64
+    .Revision      Integer32
+    .HeaderSize    Integer32
+    .CRC32         Integer32
+    .Reserved      Integer32
+}
+
+Table TableHeader

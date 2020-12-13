@@ -1,0 +1,43 @@
+struc Index
+{
+    . = index
+    index = index+1
+}
+
+struc Integer8
+{
+    . db ?
+}
+
+struc Integer16
+{
+    align 2
+    . dw ?
+}
+
+struc Integer32
+{
+    align 4
+    . dd ?
+}
+
+struc Integer64
+{
+    align 8
+    . dq ?
+}
+
+macro Table name
+{
+    virtual at 0
+    name name
+    end virtual
+}
+
+macro IndexTable name
+{
+    virtual at 0
+    index = 0
+    name name
+    end virtual
+}

@@ -1,0 +1,10 @@
+struc MemoryDescriptor
+{
+    .Type           Integer32
+    .PhysicalStart  Integer64
+    .VirtualStart   Integer64
+    .NumberOfPages  Integer64
+    .Attribute      Integer64
+}
+
+Table MemoryDescriptor

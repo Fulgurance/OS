@@ -1,0 +1,50 @@
+struc BootServices
+{
+    .Hdr                                    TableHeader
+    .RaiseTPL                               Integer64
+    .RestoreTPL                             Integer64
+    .AllocatePages                          Integer64
+    .FreePages                              Integer64
+    .GetMemoryMap                           Integer64
+    .AllocatePool                           Integer64
+    .FreePool                               Integer64
+    .CreateEvent                            Integer64
+    .SetTimer                               Integer64
+    .WaitForEvent                           Integer64
+    .SignalEvent                            Integer64
+    .CloseEvent                             Integer64
+    .CheckEvent                             Integer64
+    .InstallProtocolInterface               Integer64
+    .ReinstallProtocolInterface             Integer64
+    .UninstallProtocolInterface             Integer64
+    .HandleProtocol                         Integer64
+    .Void                                   Integer64
+    .RegisterProtocolNotify                 Integer64
+    .LocateHandle                           Integer64
+    .LocateDevicePath                       Integer64
+    .InstallConfigurationTable              Integer64
+    .LoadImage                              Integer64
+    .StartImage                             Integer64
+    .Exit                                   Integer64
+    .UnloadImage                            Integer64
+    .ExitBootServices                       Integer64
+    .GetNextMonoticCount                    Integer64
+    .Stall                                  Integer64
+    .SetWatchdogTimer                       Integer64
+    .ConnectController                      Integer64
+    .DisconnectController                   Integer64
+    .OpenProtocol                           Integer64
+    .CloseProtocol                          Integer64
+    .OpenProtocolInformation                Integer64
+    .ProcotocolsPerHandle                   Integer64
+    .LocateHandleBuffer                     Integer64
+    .LocateProtocol                         Integer64
+    .InstallMultipleProtocolInterfaces      Integer64
+    .UninstallMultipleProtocolInterfaces    Integer64
+    .CalculateCrc32                         Integer64
+    .CopyMem                                Integer64
+    .SetMem                                 Integer64
+    .CreateEventEx                          Integer64
+}
+
+Table BootServices

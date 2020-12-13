@@ -1,0 +1,10 @@
+struc GraphicsOutputBltOperation
+{
+    .VideoFill          Index
+    .VideoToBltBuffer   Index
+    .BufferToVideo      Index
+    .VideoToVideo       Index
+    .OperationMax       Index
+}
+
+IndexTable GraphicsOutputBltOperation

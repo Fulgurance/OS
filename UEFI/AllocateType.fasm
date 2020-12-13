@@ -1,0 +1,9 @@
+struc AllocateType
+{
+    .AllocateAnyPages   Index
+    .AllocateMaxAddress Index
+    .AllocateAddress    Index
+    .MaxAllocateType    Index
+}
+
+IndexTable AllocateType

@@ -1,0 +1,6 @@
+ExitBootServices -> sort de l'UEFI (jmp après la fonction pour poursuivre (possibilité de faire un saut mémoire, où serait copié le noyau)
+GetMemoryMap -> permet de connaître la localisation du firwmare UEFI en mémoire afin de ne pas écrire des données par dessus et de pouvoir appeler les fonctions UEFI après
+(penser du coup avant le ExitBootServices à bien garder en mémoire le Handle et le SystemTable)
+GetMemoryMap retourne une table de descripteur EFI, chaque descripteur ayant un type déterminant son contenu.
+
+Les fonctions UEFI ont besoin de se baser sur l'adresse de base de la système table, sinon l'adresse est faussée lors du call.

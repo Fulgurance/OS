@@ -1,0 +1,21 @@
+struc MemoryType
+{
+    .ReservedMemoryType      Index
+    .LoaderCode              Index
+    .LoaderData              Index
+    .BootServicesCode        Index
+    .BootServicesData        Index
+    .RuntimeServicesCode     Index
+    .RuntimeServicesData     Index
+    .ConventionalMemory      Index
+    .UnusableMemory          Index
+    .ACPIReclaimMemory       Index
+    .ACPIMemoryNVS           Index
+    .MemoryMappedIO          Index
+    .MemoryMappedIOPortSpace Index
+    .PalCode                 Index
+    .PersistentMemory        Index
+    .MaxMemoryType           Index
+}
+
+IndexTable MemoryType

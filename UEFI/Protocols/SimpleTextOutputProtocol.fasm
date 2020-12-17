@@ -1,0 +1,27 @@
+macro UEFISimpleTextOutputProtocolClearScreen
+{
+    push rbp
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.ClearScreen]
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFISimpleTextOutputProtocolOutputString String
+
+{
+    push rbp
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    mov rdx,String
+    call rax
+
+    add rsp,0x20
+}

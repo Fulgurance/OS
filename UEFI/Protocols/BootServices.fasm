@@ -5,9 +5,9 @@ macro UEFIBootServicesLocateProtocol Protocol,Registration,Interface
     mov rdx,[UEFISystemTable]
     mov rbx,[rdx+SystemTable.BootServices]
     mov rax,[rbx+BootServices.LocateProtocol]
-    lea rcx,[Protocol]
-    lea rdx,[Registration]
-    lea r8,[Interface]
+    lea rcx,Protocol
+    lea rdx,Registration
+    lea r8,Interface
     call rax
 
     add rsp,0x20

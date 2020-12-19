@@ -4,20 +4,20 @@ macro UEFIGraphicsOutputProtocolBlt BltBuffer,BltOperation,SourceX,SourceY,Desti
 
     mov rdx,[UEFISystemTable]
     mov rcx,[Protocols.GraphicsOutputProtocol]
-    lea rdx,[BltBuffer]
-    mov r8,[BltOperation]
-    mov r9,[SourceX]
-    lea r10,[SourceY]
+    lea rdx,BltBuffer
+    mov r8,BltOperation
+    mov r9,SourceX
+    lea r10,SourceY
     mov qword[rsp + 8*4],r10
-    lea r10,[DestinationX]
+    lea r10,DestinationX
     mov qword[rsp + 8*5],r10
-    lea r10,[DestinationY]
+    lea r10,DestinationY
     mov qword[rsp + 8*6],r10
-    lea r10,[Width]
+    lea r10,Width
     mov qword[rsp + 8*7],r10
-    lea r10,[Height]
+    lea r10,Height
     mov qword[rsp + 8*8],r10
-    lea r10,[Delta]
+    lea r10,Delta
     mov qword[rsp + 8*9],r10
     call [rcx+GraphicsOutputProtocol.Blt]
 

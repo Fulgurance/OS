@@ -18,7 +18,7 @@ macro UEFISimpleTextOutputProtocolOutputString String
     mov rdx,[UEFISystemTable]
     mov rcx,[rdx+SystemTable.ConOut]
     mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    mov rdx,String
+    lea rdx,String
     call rax
 
     add rsp,0x20

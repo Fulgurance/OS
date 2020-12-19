@@ -36,166 +36,198 @@ UEFI_HTTP_ERROR              = UEFI_ERROR or 35
 
 macro UEFIGetStatusCode
 {
-    cmp rax,UEFI_SUCCESS
+    mov rcx,UEFI_SUCCESS
+    cmp rax,rcx
     je UEFISUCCESS
     
     UEFILOADERROR:
-    cmp rax,UEFI_LOAD_ERROR
-    jne UEFIINVALID_PARAMETER
+    mov rcx,UEFI_LOAD_ERROR
+    cmp rax,rcx
+    jne UEFIINVALIDPARAMETER
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFILoadError]
     
     UEFIINVALIDPARAMETER:
-    cmp rax,UEFI_INVALID_PARAMETER
+    mov rcx,UEFI_INVALID_PARAMETER
+    cmp rax,rcx
     jne UEFIUNSUPPORTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIInvalidParameter]
     
     UEFIUNSUPPORTED:
-    cmp rax,UEFI_UNSUPPORTED
+    mov rcx,UEFI_UNSUPPORTED
+    cmp rax,rcx
     jne UEFIBADBUFFERSIZE
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIUnsupported]
     
     UEFIBADBUFFERSIZE:
-    cmp rax,UEFI_BAD_BUFFER_SIZE
+    mov rcx,UEFI_BAD_BUFFER_SIZE
     jne UEFIBUFFERTOOSMALL
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIBadBufferSize]
     
     UEFIBUFFERTOOSMALL:
-    cmp rax,UEFI_BUFFER_TOO_SMALL
+    mov rcx,UEFI_BUFFER_TOO_SMALL
+    cmp rax,rcx
     jne UEFINOTREADY
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIBufferTooSmall]
     
     UEFINOTREADY:
-    cmp rax,UEFI_NOT_READY
+    mov rcx,UEFI_NOT_READY
+    cmp rax,rcx
     jne UEFIDEVICEERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotReady]
     
     UEFIDEVICEERROR:
-    cmp rax,UEFI_DEVICE_ERROR
+    mov rcx,UEFI_DEVICE_ERROR
+    cmp rax,rcx
     jne UEFIWRITEPROTECTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIDeviceError]
     
     UEFIWRITEPROTECTED:
-    cmp rax,UEFI_WRITE_PROTECTED
+    mov rcx,UEFI_WRITE_PROTECTED
+    cmp rax,rcx
     jne UEFIOUTOFRESOURCES
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIWriteProtected]
     
     UEFIOUTOFRESOURCES:
-    cmp rax,UEFI_OUT_OF_RESOURCES
+    mov rcx,UEFI_OUT_OF_RESOURCES
+    cmp rax,rcx
     jne UEFIVOLUMECORRUPTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIOutOfResources]
     
     UEFIVOLUMECORRUPTED:
-    cmp rax,UEFI_VOLUME_CORRUPTED
+    mov rcx,UEFI_VOLUME_CORRUPTED
+    cmp rax,rcx
     jne UEFIVOLUMEFULL
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIVolumeCorrupted]
     
     UEFIVOLUMEFULL:
-    cmp rax,UEFI_VOLUME_FULL
+    mov rcx,UEFI_VOLUME_FULL
+    cmp rax,rcx
     jne UEFINOMEDIA
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIVolumeFull]
     
     UEFINOMEDIA:
-    cmp rax,UEFI_NO_MEDIA
+    mov rcx,UEFI_NO_MEDIA
+    cmp rax,rcx
     jne UEFIMEDIACHANGED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoMedia]
     
     UEFIMEDIACHANGED:
-    cmp rax,UEFI_MEDIA_CHANGED
+    mov rcx,UEFI_MEDIA_CHANGED
+    cmp rax,rcx
     jne UEFINOTFOUND
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIMediaChanged]
     
     UEFINOTFOUND:
-    cmp rax,UEFI_NOT_FOUND
+    mov rcx,UEFI_NOT_FOUND
+    cmp rax,rcx
     jne UEFIACCESSDENIED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotFound]
     
     UEFIACCESSDENIED:
-    cmp rax,UEFI_ACCESS_DENIED
+    mov rcx,UEFI_ACCESS_DENIED
+    cmp rax,rcx
     jne UEFINORESPONSE
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAccessDenied]
     
     UEFINORESPONSE:
-    cmp rax,UEFI_NO_RESPONSE
+    mov rcx,UEFI_NO_RESPONSE
+    cmp rax,rcx
     jne UEFINOMAPPING
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoResponse]
     
     UEFINOMAPPING:
-    cmp rax,UEFI_NO_MAPPING
+    mov rcx,UEFI_NO_MAPPING
+    cmp rax,rcx
     jne UEFITIMEOUT
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoMapping]
     
     UEFITIMEOUT:
-    cmp rax,UEFI_TIMEOUT
+    mov rcx,UEFI_TIMEOUT
+    cmp rax,rcx
     jne UEFINOTSTARTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFITimeOut]
     
     UEFINOTSTARTED:
-    cmp rax,UEFI_NOT_STARTED
+    mov rcx,UEFI_NOT_STARTED
+    cmp rax,rcx
     jne UEFIALREADYSTARTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotStarted]
     
     UEFIALREADYSTARTED:
-    cmp rax,UEFI_ALREADY_STARTED
+    mov rcx,UEFI_ALREADY_STARTED
+    cmp rax,rcx
     jne UEFIABORTED
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAlreadyStarted]
     
     UEFIABORTED:
-    cmp rax,UEFI_ABORTED
+    mov rcx,UEFI_ABORTED
+    cmp rax,rcx
     jne UEFIICMPERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAborted]
     
     UEFIICMPERROR:
-    cmp rax,UEFI_ICMP_ERROR
+    mov rcx,UEFI_ICMP_ERROR
+    cmp rax,rcx
     jne UEFITFTPERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIICMPError]
     
     UEFITFTPERROR:
-    cmp rax,UEFI_TFTP_ERROR
+    mov rcx,UEFI_TFTP_ERROR
+    cmp rax,rcx
     jne UEFIPROTOCOLERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFITFTPError]
     
     UEFIPROTOCOLERROR:
-    cmp rax,UEFI_PROTOCOL_ERROR
+    mov rcx,UEFI_PROTOCOL_ERROR
+    cmp rax,rcx
     jne UEFIINCOMPATIBLEVERSION
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIProtocolError]
     
     UEFIINCOMPATIBLEVERSION:
-    cmp rax,UEFI_INCOMPATIBLE_VERSION
+    mov rcx,UEFI_INCOMPATIBLE_VERSION
+    cmp rax,rcx
     jne UEFISECURITYVIOLATION
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIIncompatibleVersion]
     
     UEFISECURITYVIOLATION:
-    cmp rax,UEFI_SECURITY_VIOLATION
+    mov rcx,UEFI_SECURITY_VIOLATION
+    cmp rax,rcx
     jne UEFICRCERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFISecurityViolation]
     
     UEFICRCERROR:
-    cmp rax,UEFI_CRC_ERROR
+    mov rcx,UEFI_CRC_ERROR
+    cmp rax,rcx
     jne UEFIENDOFMEDIA
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFICRCError]
     
     UEFIENDOFMEDIA:
-    cmp rax,UEFI_END_OF_MEDIA
+    mov rcx,UEFI_END_OF_MEDIA
+    cmp rax,rcx
     jne UEFIENDOFFILE
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIEndOfMedia]
     
     UEFIENDOFFILE:
-    cmp rax,UEFI_END_OF_FILE
+    mov rcx,UEFI_END_OF_FILE
+    cmp rax,rcx
     jne UEFIINVALIDLANGUAGE
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIEndOfFile]
     
     UEFIINVALIDLANGUAGE:
-    cmp rax,UEFI_INVALID_LANGUAGE
+    mov rcx,UEFI_INVALID_LANGUAGE
+    cmp rax,rcx
     jne UEFICOMPROMISEDDATA
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIInvalidLanguage]
     
     UEFICOMPROMISEDDATA:
-    cmp rax,UEFI_COMPROMISED_DATA
+    mov rcx,UEFI_COMPROMISED_DATA
+    cmp rax,rcx
     jne UEFIIPADDRESSCONFLICT
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFICompromisedData]
     
     UEFIIPADDRESSCONFLICT:
-    cmp rax,UEFI_IP_ADDRESS_CONFLICT
+    mov rcx,UEFI_IP_ADDRESS_CONFLICT
+    cmp rax,rcx
     jne UEFIHTTPERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIIPAddressConflict]
     

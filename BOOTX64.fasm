@@ -10,6 +10,7 @@ mov [UEFISystemTable],rdx
 push rbp
 
 UEFISimpleTextOutputProtocolClearScreen
+UEFIGetStatusCode
 
 jmp $
 

@@ -1,6 +1,5 @@
 macro UEFISimpleTextOutputProtocolClearScreen
 {
-    push rbp
     sub rsp,0x20
 
     mov rdx,[UEFISystemTable]
@@ -14,7 +13,6 @@ macro UEFISimpleTextOutputProtocolClearScreen
 macro UEFISimpleTextOutputProtocolOutputString String
 
 {
-    push rbp
     sub rsp,0x20
 
     mov rdx,[UEFISystemTable]

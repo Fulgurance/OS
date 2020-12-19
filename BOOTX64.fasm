@@ -10,11 +10,10 @@ mov [UEFISystemTable],rdx
 push rbp
 
 UEFISimpleTextOutputProtocolClearScreen
-UEFISimpleTextOutputProtocolOutputString Text
 
 jmp $
 
 section '.data' data readable writable
+include "System/SystemMessage.fasm"
 UEFIHandle:         dq ?
 UEFISystemTable:    dq ?
-Text:               du "Main Operating System will start",0

@@ -10,11 +10,15 @@ mov [UEFISystemTable],rdx
 push rbp
 
 UEFISimpleTextOutputProtocolClearScreen
+UEFIBootServicesLocateHandle LocateSearchType.ByProtocol,[GUID.BlockIOProtocol],[LocateSearchKey],[LocateHandleBufferSize],[LocateHandleBuffer]
 UEFIGetStatusCode
 
 jmp $
 
 section '.data' data readable writable
 include "System/SystemMessage.fasm"
-UEFIHandle:         dq ?
-UEFISystemTable:    dq ?
+UEFIHandle:             dq ?
+UEFISystemTable:        dq ?
+LocateSearchKey:        dq ?
+LocateHandleBufferSize: dq ?
+LocateHandleBuffer: 

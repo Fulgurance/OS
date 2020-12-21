@@ -1,3 +1,49 @@
+macro UEFIBootServicesAllocatePool PoolType,Size,Buffer
+{
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.AllocatePool]
+    mov rcx,PoolType
+    mov rdx,Size
+    lea r8,Buffer
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFIBootServicesFreePool Buffer
+{
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.FreePool]
+    lea rcx,Buffer
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFIBootServicesLocateHandle SearchType,Protocol,SearchKey,BufferSize,Buffer
+{
+    sub rsp,5*8
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.LocateHandle]
+    mov rcx,SearchType
+    lea rdx,Protocol
+    lea r8,SearchKey
+    lea r9,BufferSize
+    lea r10,Buffer
+    mov qword[rsp + 8*4],r10
+    call rax
+
+    add rsp,5*8
+}
+
 macro UEFIBootServicesLocateProtocol Protocol,Registration,Interface
 {
     sub rsp,0x20
@@ -8,6 +54,20 @@ macro UEFIBootServicesLocateProtocol Protocol,Registration,Interface
     lea rcx,Protocol
     lea rdx,Registration
     lea r8,Interface
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFIBootServicesExitBootServices ImageHandle,Mapkey
+{
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.ExitBootServices]
+    mov rcx,ImageHandle
+    mov rdx,MapKey
     call rax
 
     add rsp,0x20

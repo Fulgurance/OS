@@ -232,6 +232,9 @@ macro UEFIGetStatusCode
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIIPAddressConflict]
     
     UEFIHTTPERROR:
+    mov rcx,UEFI_HTTP_ERROR
+    cmp rax,rcx
+    jne UEFIERROR
     UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIHTTPError]
     jmp UEFIERROR
     

@@ -10,15 +10,36 @@ mov [UEFISystemTable],rdx
 push rbp
 
 UEFISimpleTextOutputProtocolClearScreen
-UEFIBootServicesLocateHandle LocateSearchType.ByProtocol,[GUID.BlockIOProtocol],[LocateSearchKey],[LocateHandleBufferSize],[LocateHandleBuffer]
+UEFIBootServicesGetMemoryMap [MemoryMapSize],[MemoryMap],[MapKey],[DescriptorSize],[DescriptorVersion]
+;UEFIGetStatusCode | UEFI RETURN IN MEMORYMAPSIZE THE SIZE NEEDED FOR THE BUFFER
+UEFIBootServicesAllocatePool MemoryType.LoaderData,[MemoryMapSize],[AllocatePoolBufferAddress]
+;UEFIGetStatusCode | UEFI LOADERDATA IS FOR UEFI APPLICATION
+;UEFIBootServicesGetMemoryMap [MemoryMapSize],[AllocatePoolBufferAddress],[MapKey],[DescriptorSize],[DescriptorVersion]
+sub rsp,5*8
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.GetMemoryMap]
+    lea rcx,[MemoryMapSize]
+    mov rdx,[AllocatePoolBufferAddress]
+    lea r8,[MapKey]
+    lea r9,[DescriptorSize]
+    lea r10,[DescriptorVersion]
+    mov qword[rsp + 8*4],r10
+    call rax
+
+    add rsp,5*8
 UEFIGetStatusCode
 
 jmp $
 
 section '.data' data readable writable
 include "System/SystemMessage.fasm"
-UEFIHandle:             dq ?
-UEFISystemTable:        dq ?
-LocateSearchKey:        dq ?
-LocateHandleBufferSize: dq ?
-LocateHandleBuffer: 
+UEFIHandle:                 dq ?
+UEFISystemTable:            dq ?
+MemoryMapSize:              dq ?
+MemoryMap:                  dq ?
+MapKey:                     dq ?
+DescriptorSize:             dq ?
+DescriptorVersion:          dd ?
+AllocatePoolBufferAddress:  dq ?

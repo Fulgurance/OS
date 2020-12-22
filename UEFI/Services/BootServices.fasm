@@ -1,3 +1,51 @@
+macro UEFIBootServicesAllocatePages Type,MemoryType,Pages,Memory
+{
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.AllocatePages]
+    mov rcx,Type
+    mov rdx,MemoryType
+    mov r8,Pages
+    lea r9,Memory
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFIBootServicesFreePages Memory,Pages
+{
+    sub rsp,0x20
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.FreePages]
+    mov rcx,Memory
+    mov rdx,Pages
+    call rax
+
+    add rsp,0x20
+}
+
+macro UEFIBootServicesGetMemoryMap MemoryMapSize,MemoryMap,MapKey,DescriptorSize,DescriptorVersion
+{
+    sub rsp,5*8
+
+    mov rdx,[UEFISystemTable]
+    mov rbx,[rdx+SystemTable.BootServices]
+    mov rax,[rbx+BootServices.GetMemoryMap]
+    lea rcx,MemoryMapSize
+    lea rdx,MemoryMap
+    lea r8,MapKey
+    lea r9,DescriptorSize
+    lea r10,DescriptorVersion
+    mov qword[rsp + 8*4],r10
+    call rax
+
+    add rsp,5*8
+}
+
 macro UEFIBootServicesAllocatePool PoolType,Size,Buffer
 {
     sub rsp,0x20

@@ -44,202 +44,440 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_LOAD_ERROR
     cmp rax,rcx
     jne UEFIINVALIDPARAMETER
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFILoadError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFILoadError]
+    call rax
+    add rsp,0x20
     
     UEFIINVALIDPARAMETER:
     mov rcx,UEFI_INVALID_PARAMETER
     cmp rax,rcx
     jne UEFIUNSUPPORTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIInvalidParameter]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIInvalidParameter]
+    call rax
+    add rsp,0x20
     
     UEFIUNSUPPORTED:
     mov rcx,UEFI_UNSUPPORTED
     cmp rax,rcx
     jne UEFIBADBUFFERSIZE
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIUnsupported]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIUnsupported]
+    call rax
+    add rsp,0x20
     
     UEFIBADBUFFERSIZE:
     mov rcx,UEFI_BAD_BUFFER_SIZE
     jne UEFIBUFFERTOOSMALL
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIBadBufferSize]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIBadBufferSize]
+    call rax
+    add rsp,0x20
     
     UEFIBUFFERTOOSMALL:
     mov rcx,UEFI_BUFFER_TOO_SMALL
     cmp rax,rcx
     jne UEFINOTREADY
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIBufferTooSmall]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIBufferTooSmall]
+    call rax
+    add rsp,0x20
     
     UEFINOTREADY:
     mov rcx,UEFI_NOT_READY
     cmp rax,rcx
     jne UEFIDEVICEERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotReady]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINotReady]
+    call rax
+    add rsp,0x20
     
     UEFIDEVICEERROR:
     mov rcx,UEFI_DEVICE_ERROR
     cmp rax,rcx
     jne UEFIWRITEPROTECTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIDeviceError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIDeviceError]
+    call rax
+    add rsp,0x20
     
     UEFIWRITEPROTECTED:
     mov rcx,UEFI_WRITE_PROTECTED
     cmp rax,rcx
     jne UEFIOUTOFRESOURCES
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIWriteProtected]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIWriteProtected]
+    call rax
+    add rsp,0x20
     
     UEFIOUTOFRESOURCES:
     mov rcx,UEFI_OUT_OF_RESOURCES
     cmp rax,rcx
     jne UEFIVOLUMECORRUPTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIOutOfResources]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIOutOfResources]
+    call rax
+    add rsp,0x20
     
     UEFIVOLUMECORRUPTED:
     mov rcx,UEFI_VOLUME_CORRUPTED
     cmp rax,rcx
     jne UEFIVOLUMEFULL
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIVolumeCorrupted]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIVolumeCorrupted]
+    call rax
+    add rsp,0x20
     
     UEFIVOLUMEFULL:
     mov rcx,UEFI_VOLUME_FULL
     cmp rax,rcx
     jne UEFINOMEDIA
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIVolumeFull]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIVolumeFull]
+    call rax
+    add rsp,0x20
     
     UEFINOMEDIA:
     mov rcx,UEFI_NO_MEDIA
     cmp rax,rcx
     jne UEFIMEDIACHANGED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoMedia]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINoMedia]
+    call rax
+    add rsp,0x20
     
     UEFIMEDIACHANGED:
     mov rcx,UEFI_MEDIA_CHANGED
     cmp rax,rcx
     jne UEFINOTFOUND
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIMediaChanged]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIMediaChanged]
+    call rax
+    add rsp,0x20
     
     UEFINOTFOUND:
     mov rcx,UEFI_NOT_FOUND
     cmp rax,rcx
     jne UEFIACCESSDENIED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotFound]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINotFound]
+    call rax
+    add rsp,0x20
     
     UEFIACCESSDENIED:
     mov rcx,UEFI_ACCESS_DENIED
     cmp rax,rcx
     jne UEFINORESPONSE
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAccessDenied]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIAccessDenied]
+    call rax
+    add rsp,0x20
     
     UEFINORESPONSE:
     mov rcx,UEFI_NO_RESPONSE
     cmp rax,rcx
     jne UEFINOMAPPING
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoResponse]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINoResponse]
+    call rax
+    add rsp,0x20
     
     UEFINOMAPPING:
     mov rcx,UEFI_NO_MAPPING
     cmp rax,rcx
     jne UEFITIMEOUT
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINoMapping]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINoMapping]
+    call rax
+    add rsp,0x20
     
     UEFITIMEOUT:
     mov rcx,UEFI_TIMEOUT
     cmp rax,rcx
     jne UEFINOTSTARTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFITimeOut]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFITimeOut]
+    call rax
+    add rsp,0x20
     
     UEFINOTSTARTED:
     mov rcx,UEFI_NOT_STARTED
     cmp rax,rcx
     jne UEFIALREADYSTARTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFINotStarted]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFINotStarted]
+    call rax
+    add rsp,0x20
     
     UEFIALREADYSTARTED:
     mov rcx,UEFI_ALREADY_STARTED
     cmp rax,rcx
     jne UEFIABORTED
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAlreadyStarted]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIAlreadyStarted]
+    call rax
+    add rsp,0x20
     
     UEFIABORTED:
     mov rcx,UEFI_ABORTED
     cmp rax,rcx
     jne UEFIICMPERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIAborted]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIAborted]
+    call rax
+    add rsp,0x20
     
     UEFIICMPERROR:
     mov rcx,UEFI_ICMP_ERROR
     cmp rax,rcx
     jne UEFITFTPERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIICMPError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIICMPError]
+    call rax
+    add rsp,0x20
     
     UEFITFTPERROR:
     mov rcx,UEFI_TFTP_ERROR
     cmp rax,rcx
     jne UEFIPROTOCOLERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFITFTPError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFITFTPError]
+    call rax
+    add rsp,0x20
     
     UEFIPROTOCOLERROR:
     mov rcx,UEFI_PROTOCOL_ERROR
     cmp rax,rcx
     jne UEFIINCOMPATIBLEVERSION
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIProtocolError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIProtocolError]
+    call rax
+    add rsp,0x20
     
     UEFIINCOMPATIBLEVERSION:
     mov rcx,UEFI_INCOMPATIBLE_VERSION
     cmp rax,rcx
     jne UEFISECURITYVIOLATION
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIIncompatibleVersion]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIIncompatibleVersion]
+    call rax
+    add rsp,0x20
     
     UEFISECURITYVIOLATION:
     mov rcx,UEFI_SECURITY_VIOLATION
     cmp rax,rcx
     jne UEFICRCERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFISecurityViolation]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFISecurityViolation]
+    call rax
+    add rsp,0x20
     
     UEFICRCERROR:
     mov rcx,UEFI_CRC_ERROR
     cmp rax,rcx
     jne UEFIENDOFMEDIA
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFICRCError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFICRCError]
+    call rax
+    add rsp,0x20
     
     UEFIENDOFMEDIA:
     mov rcx,UEFI_END_OF_MEDIA
     cmp rax,rcx
     jne UEFIENDOFFILE
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIEndOfMedia]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIEndOfMedia]
+    call rax
+    add rsp,0x20
     
     UEFIENDOFFILE:
     mov rcx,UEFI_END_OF_FILE
     cmp rax,rcx
     jne UEFIINVALIDLANGUAGE
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIEndOfFile]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIEndOfFile]
+    call rax
+    add rsp,0x20
     
     UEFIINVALIDLANGUAGE:
     mov rcx,UEFI_INVALID_LANGUAGE
     cmp rax,rcx
     jne UEFICOMPROMISEDDATA
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIInvalidLanguage]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIInvalidLanguage]
+    call rax
+    add rsp,0x20
     
     UEFICOMPROMISEDDATA:
     mov rcx,UEFI_COMPROMISED_DATA
     cmp rax,rcx
     jne UEFIIPADDRESSCONFLICT
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFICompromisedData]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFICompromisedData]
+    call rax
+    add rsp,0x20
     
     UEFIIPADDRESSCONFLICT:
     mov rcx,UEFI_IP_ADDRESS_CONFLICT
     cmp rax,rcx
     jne UEFIHTTPERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIIPAddressConflict]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIIPAddressConflict]
+    call rax
+    add rsp,0x20
     
     UEFIHTTPERROR:
     mov rcx,UEFI_HTTP_ERROR
     cmp rax,rcx
     jne UEFIERROR
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFIHTTPError]
+    
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFIHTTPError]
+    call rax
+    add rsp,0x20
+    
     jmp UEFIERROR
     
     UEFISUCCESS:
-    UEFISimpleTextOutputProtocolOutputString [SystemMessage.UEFISuccess]
+    sub rsp,0x20
+    mov rdx,[UEFISystemTable]
+    mov rcx,[rdx+SystemTable.ConOut]
+    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
+    lea rdx,[SystemMessage.UEFISuccess]
+    call rax
+    add rsp,0x20
     
     UEFIERROR:
 }

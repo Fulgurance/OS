@@ -9,27 +9,57 @@ mov [UEFIHandle],rcx
 mov [UEFISystemTable],rdx
 push rbp
 
-UEFISimpleTextOutputProtocolClearScreen
-UEFIBootServicesGetMemoryMap [MemoryMapSize],[MemoryMap],[MapKey],[DescriptorSize],[DescriptorVersion]
-;UEFIGetStatusCode | UEFI RETURN IN MEMORYMAPSIZE THE SIZE NEEDED FOR THE BUFFER
-UEFIBootServicesAllocatePool MemoryType.LoaderData,[MemoryMapSize],[AllocatePoolBufferAddress]
-;UEFIGetStatusCode | UEFI LOADERDATA IS FOR UEFI APPLICATION
-;UEFIBootServicesGetMemoryMap [MemoryMapSize],[AllocatePoolBufferAddress],[MapKey],[DescriptorSize],[DescriptorVersion]
+sub rsp,0x20
+mov rdx,[UEFISystemTable]
+mov rcx,[rdx+SystemTable.ConOut]
+mov rax,[rcx+SimpleTextOutputProtocol.ClearScreen]
+call rax
+add rsp,0x20
+    
 sub rsp,5*8
+mov rdx,[UEFISystemTable]
+mov rbx,[rdx+SystemTable.BootServices]
+mov rax,[rbx+BootServices.GetMemoryMap]
+lea rcx,[MemoryMapSize]
+lea rdx,[MemoryMap]
+lea r8,[MapKey]
+lea r9,[DescriptorSize]
+lea r10,[DescriptorVersion]
+mov qword[rsp + 8*4],r10
+call rax
+add rsp,5*8
+    
+;UEFIGetStatusCode | UEFI RETURN IN MEMORYMAPSIZE THE SIZE NEEDED FOR THE BUFFER
 
-    mov rdx,[UEFISystemTable]
-    mov rbx,[rdx+SystemTable.BootServices]
-    mov rax,[rbx+BootServices.GetMemoryMap]
-    lea rcx,[MemoryMapSize]
-    mov rdx,[AllocatePoolBufferAddress]
-    lea r8,[MapKey]
-    lea r9,[DescriptorSize]
-    lea r10,[DescriptorVersion]
-    mov qword[rsp + 8*4],r10
-    call rax
+mov rax,[MemoryMapSize]
+add qword [MemoryMapSize],rax
 
-    add rsp,5*8
-UEFIGetStatusCode
+sub rsp,0x20
+mov rdx,[UEFISystemTable]
+mov rbx,[rdx+SystemTable.BootServices]
+mov rax,[rbx+BootServices.AllocatePool]
+mov rcx,MemoryType.LoaderData
+mov rdx,[MemoryMapSize]
+lea r8,[AllocatePoolBufferAddress]
+call rax
+add rsp,0x20
+
+;UEFIGetStatusCode | UEFI LOADERDATA IS FOR UEFI APPLICATION
+
+sub rsp,5*8
+mov rdx,[UEFISystemTable]
+mov rbx,[rdx+SystemTable.BootServices]
+mov rax,[rbx+BootServices.GetMemoryMap]
+lea rcx,[MemoryMapSize]
+mov rdx,[AllocatePoolBufferAddress]
+lea r8,[MapKey]
+lea r9,[DescriptorSize]
+lea r10,[DescriptorVersion]
+mov qword[rsp + 8*4],r10
+call rax
+add rsp,5*8
+
+UEFIGetStatusCode; | UEFI COPY MEMORYMAP INTO THE ALLOCATED POOL
 
 jmp $
 

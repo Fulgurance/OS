@@ -9,57 +9,34 @@ mov [UEFIHandle],rcx
 mov [UEFISystemTable],rdx
 push rbp
 
-sub rsp,0x20
-mov rdx,[UEFISystemTable]
-mov rcx,[rdx+SystemTable.ConOut]
-mov rax,[rcx+SimpleTextOutputProtocol.ClearScreen]
-call rax
-add rsp,0x20
-    
-sub rsp,5*8
-mov rdx,[UEFISystemTable]
-mov rbx,[rdx+SystemTable.BootServices]
-mov rax,[rbx+BootServices.GetMemoryMap]
-lea rcx,[MemoryMapSize]
-lea rdx,[MemoryMap]
-lea r8,[MapKey]
-lea r9,[DescriptorSize]
-lea r10,[DescriptorVersion]
-mov qword[rsp + 8*4],r10
-call rax
-add rsp,5*8
-    
-;UEFIGetStatusCode | UEFI RETURN IN MEMORYMAPSIZE THE SIZE NEEDED FOR THE BUFFER
+UEFI ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER
 
+UEFIGetStatusCode
+        
+UEFI BootServices,BootServices,GetMemoryMap,5, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize]
+
+UEFIGetStatusCode
+        
 mov rax,[MemoryMapSize]
 add qword [MemoryMapSize],rax
 
-sub rsp,0x20
-mov rdx,[UEFISystemTable]
-mov rbx,[rdx+SystemTable.BootServices]
-mov rax,[rbx+BootServices.AllocatePool]
-mov rcx,MemoryType.LoaderData
-mov rdx,[MemoryMapSize]
-lea r8,[AllocatePoolBufferAddress]
-call rax
-add rsp,0x20
+UEFI BootServices,BootServices,AllocatePool,3, \
+        UEFI_ARGUMENT_TYPE_VALUE,MemoryType.LoaderData, \
+        UEFI_ARGUMENT_TYPE_VALUE,[MemoryMapSize], \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapAddress]
 
-;UEFIGetStatusCode | UEFI LOADERDATA IS FOR UEFI APPLICATION
+UEFIGetStatusCode
 
-sub rsp,5*8
-mov rdx,[UEFISystemTable]
-mov rbx,[rdx+SystemTable.BootServices]
-mov rax,[rbx+BootServices.GetMemoryMap]
-lea rcx,[MemoryMapSize]
-mov rdx,[AllocatePoolBufferAddress]
-lea r8,[MapKey]
-lea r9,[DescriptorSize]
-lea r10,[DescriptorVersion]
-mov qword[rsp + 8*4],r10
-call rax
-add rsp,5*8
+UEFI BootServices,BootServices,GetMemoryMap,5, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize], \
+        UEFI_ARGUMENT_TYPE_VALUE,[MemoryMapAddress], \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[MapKey], \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorSize], \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorVersion]
 
-UEFIGetStatusCode; | UEFI COPY MEMORYMAP INTO THE ALLOCATED POOL
+UEFIGetStatusCode
 
 jmp $
 
@@ -68,8 +45,8 @@ include "System/SystemMessage.fasm"
 UEFIHandle:                 dq ?
 UEFISystemTable:            dq ?
 MemoryMapSize:              dq ?
-MemoryMap:                  dq ?
+MemoryMapAddress:           dq ?
 MapKey:                     dq ?
 DescriptorSize:             dq ?
 DescriptorVersion:          dd ?
-AllocatePoolBufferAddress:  dq ?
+PageDirectoryAddress:       dq ?

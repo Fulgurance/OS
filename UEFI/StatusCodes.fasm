@@ -33,451 +33,313 @@ UEFI_INVALID_LANGUAGE        = UEFI_ERROR or 32
 UEFI_COMPROMISED_DATA        = UEFI_ERROR or 33
 UEFI_IP_ADDRESS_CONFLICT     = UEFI_ERROR or 34
 UEFI_HTTP_ERROR              = UEFI_ERROR or 35
-
+    
 macro UEFIGetStatusCode
 {
-    mov rcx,UEFI_SUCCESS
-    cmp rax,rcx
-    je UEFISUCCESS
-    
-    UEFILOADERROR:
     mov rcx,UEFI_LOAD_ERROR
     cmp rax,rcx
-    jne UEFIINVALIDPARAMETER
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFILoadError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFILoadError]
     
-    UEFIINVALIDPARAMETER:
+    @@:
     mov rcx,UEFI_INVALID_PARAMETER
     cmp rax,rcx
-    jne UEFIUNSUPPORTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIInvalidParameter]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIInvalidParameter]
     
-    UEFIUNSUPPORTED:
+    @@:
     mov rcx,UEFI_UNSUPPORTED
     cmp rax,rcx
-    jne UEFIBADBUFFERSIZE
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIUnsupported]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIUnsupported]
     
-    UEFIBADBUFFERSIZE:
+    @@:
     mov rcx,UEFI_BAD_BUFFER_SIZE
-    jne UEFIBUFFERTOOSMALL
+    cmp rax,rcx
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIBadBufferSize]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIBadBufferSize]
     
-    UEFIBUFFERTOOSMALL:
+    @@:
     mov rcx,UEFI_BUFFER_TOO_SMALL
     cmp rax,rcx
-    jne UEFINOTREADY
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIBufferTooSmall]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIBufferTooSmall]
     
-    UEFINOTREADY:
+    @@:
     mov rcx,UEFI_NOT_READY
     cmp rax,rcx
-    jne UEFIDEVICEERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINotReady]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINotReady]
     
-    UEFIDEVICEERROR:
+    @@:
     mov rcx,UEFI_DEVICE_ERROR
     cmp rax,rcx
-    jne UEFIWRITEPROTECTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIDeviceError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIDeviceError]
     
-    UEFIWRITEPROTECTED:
+    @@:
     mov rcx,UEFI_WRITE_PROTECTED
     cmp rax,rcx
-    jne UEFIOUTOFRESOURCES
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIWriteProtected]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIWriteProtected]
     
-    UEFIOUTOFRESOURCES:
+    @@:
     mov rcx,UEFI_OUT_OF_RESOURCES
     cmp rax,rcx
-    jne UEFIVOLUMECORRUPTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIOutOfResources]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIOutOfResources]
     
-    UEFIVOLUMECORRUPTED:
+    @@:
     mov rcx,UEFI_VOLUME_CORRUPTED
     cmp rax,rcx
-    jne UEFIVOLUMEFULL
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIVolumeCorrupted]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIVolumeCorrupted]
     
-    UEFIVOLUMEFULL:
+    @@:
     mov rcx,UEFI_VOLUME_FULL
     cmp rax,rcx
-    jne UEFINOMEDIA
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIVolumeFull]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIVolumeFull]
     
-    UEFINOMEDIA:
+    @@:
     mov rcx,UEFI_NO_MEDIA
     cmp rax,rcx
-    jne UEFIMEDIACHANGED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINoMedia]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINoMedia]
     
-    UEFIMEDIACHANGED:
+    @@:
     mov rcx,UEFI_MEDIA_CHANGED
     cmp rax,rcx
-    jne UEFINOTFOUND
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIMediaChanged]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIMediaChanged]
     
-    UEFINOTFOUND:
+    @@:
     mov rcx,UEFI_NOT_FOUND
     cmp rax,rcx
-    jne UEFIACCESSDENIED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINotFound]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINotFound]
     
-    UEFIACCESSDENIED:
+    @@:
     mov rcx,UEFI_ACCESS_DENIED
     cmp rax,rcx
-    jne UEFINORESPONSE
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIAccessDenied]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIAccessDenied]
     
-    UEFINORESPONSE:
+    @@:
     mov rcx,UEFI_NO_RESPONSE
     cmp rax,rcx
-    jne UEFINOMAPPING
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINoResponse]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINoResponse]
     
-    UEFINOMAPPING:
+    @@:
     mov rcx,UEFI_NO_MAPPING
     cmp rax,rcx
-    jne UEFITIMEOUT
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINoMapping]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINoMapping]
     
-    UEFITIMEOUT:
+    @@:
     mov rcx,UEFI_TIMEOUT
     cmp rax,rcx
-    jne UEFINOTSTARTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFITimeOut]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFITimeOut]
     
-    UEFINOTSTARTED:
+    @@:
     mov rcx,UEFI_NOT_STARTED
     cmp rax,rcx
-    jne UEFIALREADYSTARTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFINotStarted]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINotStarted]
     
-    UEFIALREADYSTARTED:
+    @@:
     mov rcx,UEFI_ALREADY_STARTED
     cmp rax,rcx
-    jne UEFIABORTED
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIAlreadyStarted]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIAlreadyStarted]
     
-    UEFIABORTED:
+    @@:
     mov rcx,UEFI_ABORTED
     cmp rax,rcx
-    jne UEFIICMPERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIAborted]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIAborted]
     
-    UEFIICMPERROR:
+    @@:
     mov rcx,UEFI_ICMP_ERROR
     cmp rax,rcx
-    jne UEFITFTPERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIICMPError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIICMPError]
     
-    UEFITFTPERROR:
+    @@:
     mov rcx,UEFI_TFTP_ERROR
     cmp rax,rcx
-    jne UEFIPROTOCOLERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFITFTPError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFITFTPError]
     
-    UEFIPROTOCOLERROR:
+    @@:
     mov rcx,UEFI_PROTOCOL_ERROR
     cmp rax,rcx
-    jne UEFIINCOMPATIBLEVERSION
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIProtocolError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIProtocolError]
     
-    UEFIINCOMPATIBLEVERSION:
+    @@:
     mov rcx,UEFI_INCOMPATIBLE_VERSION
     cmp rax,rcx
-    jne UEFISECURITYVIOLATION
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIIncompatibleVersion]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIIncompatibleVersion]
     
-    UEFISECURITYVIOLATION:
+    @@:
     mov rcx,UEFI_SECURITY_VIOLATION
     cmp rax,rcx
-    jne UEFICRCERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFISecurityViolation]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFISecurityViolation]
     
-    UEFICRCERROR:
+    @@:
     mov rcx,UEFI_CRC_ERROR
     cmp rax,rcx
-    jne UEFIENDOFMEDIA
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFICRCError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFICRCError]
     
-    UEFIENDOFMEDIA:
+    @@:
     mov rcx,UEFI_END_OF_MEDIA
     cmp rax,rcx
-    jne UEFIENDOFFILE
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIEndOfMedia]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIEndOfMedia]
     
-    UEFIENDOFFILE:
+    @@:
     mov rcx,UEFI_END_OF_FILE
     cmp rax,rcx
-    jne UEFIINVALIDLANGUAGE
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIEndOfFile]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIEndOfFile]
     
-    UEFIINVALIDLANGUAGE:
+    @@:
     mov rcx,UEFI_INVALID_LANGUAGE
     cmp rax,rcx
-    jne UEFICOMPROMISEDDATA
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIInvalidLanguage]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIInvalidLanguage]
     
-    UEFICOMPROMISEDDATA:
+    @@:
     mov rcx,UEFI_COMPROMISED_DATA
     cmp rax,rcx
-    jne UEFIIPADDRESSCONFLICT
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFICompromisedData]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFICompromisedData]
     
-    UEFIIPADDRESSCONFLICT:
+    @@:
     mov rcx,UEFI_IP_ADDRESS_CONFLICT
     cmp rax,rcx
-    jne UEFIHTTPERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIIPAddressConflict]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIIPAddressConflict]
     
-    UEFIHTTPERROR:
+    @@:
     mov rcx,UEFI_HTTP_ERROR
     cmp rax,rcx
-    jne UEFIERROR
+    jne @f
     
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFIHTTPError]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIHTTPError]
     
-    jmp UEFIERROR
+    @@:
+    mov rcx,UEFI_SUCCESS
+    cmp rax,rcx
+    jne @f
     
-    UEFISUCCESS:
-    sub rsp,0x20
-    mov rdx,[UEFISystemTable]
-    mov rcx,[rdx+SystemTable.ConOut]
-    mov rax,[rcx+SimpleTextOutputProtocol.OutputString]
-    lea rdx,[SystemMessage.UEFISuccess]
-    call rax
-    add rsp,0x20
+    UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFISuccess]
     
-    UEFIERROR:
+    @@:
 }

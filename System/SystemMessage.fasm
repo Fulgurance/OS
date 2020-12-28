@@ -1,35 +1,35 @@
 SystemMessage:
-.UEFISuccess:               du "UEFI Status: The operation completed successfully",0x0
-.UEFILoadError:             du "UEFI Status: The image failed to load",0x0
-.UEFIInvalidParameter:      du "UEFI Status: A parameter was incorrect",0x0
-.UEFIUnsupported:           du "UEFI Status: The operation is not supported",0x0
-.UEFIBadBufferSize:         du "UEFI Status: The buffer was not the proper size for the request",0x0
-.UEFIBufferTooSmall:        du "UEFI Status: The buffer is not large enough to hold the requested data",0x0
-.UEFINotReady:              du "UEFI Status: There is no data pending upon return",0x0
-.UEFIDeviceError:           du "UEFI Status: The physical device reported an error while attempting the operation",0x0
-.UEFIWriteProtected:        du "UEFI Status: The device cannot be written to",0x0
-.UEFIOutOfResources:        du "UEFI Status: A resource has run out",0x0
-.UEFIVolumeCorrupted:       du "UEFI Status: An inconstancy was detected on the file system causing the operating to fail",0x0
-.UEFIVolumeFull:            du "UEFI Status: There is no more space on the file system",0x0
-.UEFINoMedia:               du "UEFI Status: The device does not contain any medium to perform the operation",0x0
-.UEFIMediaChanged:          du "UEFI Status: The medium in the device has changed since the last access",0x0
-.UEFINotFound:              du "UEFI Status: The item was not found",0x0
-.UEFIAccessDenied:          du "UEFI Status: Access was denied",0x0
-.UEFINoResponse:            du "UEFI Status: The server was not found or did not respond to the request",0x0
-.UEFINoMapping:             du "UEFI Status: A mapping to a device does not exist",0x0
-.UEFITimeOut:               du "UEFI Status: The timeout time expired. ",0x0
-.UEFINotStarted:            du "UEFI Status: The protocol has not been started",0x0
-.UEFIAlreadyStarted:        du "UEFI Status: The protocol has already been started",0x0
-.UEFIAborted:               du "UEFI Status: The operation was aborted",0x0
-.UEFIICMPError:             du "UEFI Status: An ICMP error occurred during the network operation",0x0
-.UEFITFTPError:             du "UEFI Status: A TFTP error occurred during the network operation",0x0
-.UEFIProtocolError:         du "UEFI Status: A protocol error occurred during the network operation",0x0
-.UEFIIncompatibleVersion:   du "UEFI Status: The function encountered an internal version that was incompatible with a version requested by the caller",0x0
-.UEFISecurityViolation:     du "UEFI Status: The function was not performed due to a security violation",0x0
-.UEFICRCError:              du "UEFI Status: A CRC error was detected",0x0
-.UEFIEndOfMedia:            du "UEFI Status: Beginning or end of media was reached",0x0
-.UEFIEndOfFile:             du "UEFI Status: The end of the file was reached",0x0
-.UEFIInvalidLanguage:       du "UEFI Status: The language specified was invalid",0x0
-.UEFICompromisedData:       du "UEFI Status: The security status of the data is unknown or compromised",0x0
-.UEFIIPAddressConflict:     du "UEFI Status: There is an address conflict address allocation",0x0
-.UEFIHTTPError:             du "UEFI Status: A HTTP error occurred during the network operation",0x0
+.UEFISuccess:               du "UEFI Status: The operation completed successfully",0xD,0xA,0x0
+.UEFILoadError:             du "UEFI Status: The image failed to load",0xD,0xA,0x0
+.UEFIInvalidParameter:      du "UEFI Status: A parameter was incorrect",0xD,0xA,0x0
+.UEFIUnsupported:           du "UEFI Status: The operation is not supported",0xD,0xA,0x0
+.UEFIBadBufferSize:         du "UEFI Status: The buffer was not the proper size for the request",0xD,0xA,0x0
+.UEFIBufferTooSmall:        du "UEFI Status: The buffer is not large enough to hold the requested data",0xD,0xA,0x0
+.UEFINotReady:              du "UEFI Status: There is no data pending upon return",0xD,0xA,0x0
+.UEFIDeviceError:           du "UEFI Status: The physical device reported an error while attempting the operation",0xD,0xA,0x0
+.UEFIWriteProtected:        du "UEFI Status: The device cannot be written to",0xD,0xA,0x0
+.UEFIOutOfResources:        du "UEFI Status: A resource has run out",0xD,0xA,0x0
+.UEFIVolumeCorrupted:       du "UEFI Status: An inconstancy was detected on the file system causing the operating to fail",0xD,0xA,0x0
+.UEFIVolumeFull:            du "UEFI Status: There is no more space on the file system",0xD,0xA,0x0
+.UEFINoMedia:               du "UEFI Status: The device does not contain any medium to perform the operation",0xD,0xA,0x0
+.UEFIMediaChanged:          du "UEFI Status: The medium in the device has changed since the last access",0xD,0xA,0x0
+.UEFINotFound:              du "UEFI Status: The item was not found",0xD,0xA,0x0
+.UEFIAccessDenied:          du "UEFI Status: Access was denied",0xD,0xA,0x0
+.UEFINoResponse:            du "UEFI Status: The server was not found or did not respond to the request",0xD,0xA,0x0
+.UEFINoMapping:             du "UEFI Status: A mapping to a device does not exist",0xD,0xA,0x0
+.UEFITimeOut:               du "UEFI Status: The timeout time expired. ",0xD,0xA,0x0
+.UEFINotStarted:            du "UEFI Status: The protocol has not been started",0xD,0xA,0x0
+.UEFIAlreadyStarted:        du "UEFI Status: The protocol has already been started",0xD,0xA,0x0
+.UEFIAborted:               du "UEFI Status: The operation was aborted",0xD,0xA,0x0
+.UEFIICMPError:             du "UEFI Status: An ICMP error occurred during the network operation",0xD,0xA,0x0
+.UEFITFTPError:             du "UEFI Status: A TFTP error occurred during the network operation",0xD,0xA,0x0
+.UEFIProtocolError:         du "UEFI Status: A protocol error occurred during the network operation",0xD,0xA,0x0
+.UEFIIncompatibleVersion:   du "UEFI Status: The function encountered an internal version that was incompatible with a version requested by the caller",0xD,0xA,0x0
+.UEFISecurityViolation:     du "UEFI Status: The function was not performed due to a security violation",0xD,0xA,0x0
+.UEFICRCError:              du "UEFI Status: A CRC error was detected",0xD,0xA,0x0
+.UEFIEndOfMedia:            du "UEFI Status: Beginning or end of media was reached",0xD,0xA,0x0
+.UEFIEndOfFile:             du "UEFI Status: The end of the file was reached",0xD,0xA,0x0
+.UEFIInvalidLanguage:       du "UEFI Status: The language specified was invalid",0xD,0xA,0x0
+.UEFICompromisedData:       du "UEFI Status: The security status of the data is unknown or compromised",0xD,0xA,0x0
+.UEFIIPAddressConflict:     du "UEFI Status: There is an address conflict address allocation",0xD,0xA,0x0
+.UEFIHTTPError:             du "UEFI Status: A HTTP error occurred during the network operation",0xD,0xA,0x0

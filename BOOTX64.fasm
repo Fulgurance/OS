@@ -1,13 +1,27 @@
 format pe64 efi
-entry Main
+entry Bootx64
+
+include "UEFI/Virtual/ArgumentTypes.fasm"
+include "UEFI/Virtual/DataTypes.fasm"
+include "UEFI/Virtual/StatusCodes.fasm"
+include "UEFI/Virtual/IndexTables/AllocateType.fasm"
+include "UEFI/Virtual/IndexTables/GraphicsOutputBltOperation.fasm"
+include "UEFI/Virtual/IndexTables/LocateSearchType.fasm"
+include "UEFI/Virtual/IndexTables/MemoryType.fasm"
+include "UEFI/Virtual/Tables/TableHeader.fasm"
+include "UEFI/Virtual/Tables/BootServices.fasm"
+include "UEFI/Virtual/Tables/GraphicsOutputProtocol.fasm"
+include "UEFI/Virtual/Tables/MemoryDescriptor.fasm"
+include "UEFI/Virtual/Tables/SimpleTextOutputProtocol.fasm"
+include "UEFI/Virtual/Tables/SystemTable.fasm"
 
 section '.text' code readable executable
-include "UEFI/UEFI.fasm"
+include "UEFI/Code/UEFI.fasm"
+include "UEFI/Code/GetStatusCodes.fasm"
+include "UEFI/Code/Initialize.fasm"
 
-Main:
-mov [UEFIHandle],rcx
-mov [UEFISystemTable],rdx
-push rbp
+Bootx64:
+UEFIInitialize
 
 UEFI ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER
@@ -41,7 +55,9 @@ UEFIGetStatusCode
 jmp $
 
 section '.data' data readable writable
-include "System/SystemMessage.fasm"
+include "UEFI/Data/GUID.fasm"
+include "UEFI/Data/Protocols.fasm"
+include "UEFI/Data/SystemMessage.fasm"
 UEFIHandle:                 dq ?
 UEFISystemTable:            dq ?
 MemoryMapSize:              dq ?

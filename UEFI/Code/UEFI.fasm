@@ -1,22 +1,3 @@
-include "DataTypes.fasm"
-include "StatusCodes.fasm"
-include "GUID.fasm"
-include "Protocols.fasm"
-include "IndexTables/AllocateType.fasm"
-include "IndexTables/GraphicsOutputBltOperation.fasm"
-include "IndexTables/LocateSearchType.fasm"
-include "IndexTables/MemoryType.fasm"
-include "Tables/TableHeader.fasm"
-include "Tables/BootServices.fasm"
-include "Tables/GraphicsOutputProtocol.fasm"
-include "Tables/MemoryDescriptor.fasm"
-include "Tables/SimpleTextOutputProtocol.fasm"
-include "Tables/SystemTable.fasm"
-
-UEFI_ARGUMENT_TYPE_ADDRESS          = 0
-UEFI_ARGUMENT_TYPE_VALUE            = 1
-UEFI_ARGUMENT_TYPE_INSTANCE_POINTER = 2
-
 macro UEFI Entry*,Interface*,Function*,ParametersNumber*,Type1*,Argument1,Type2,Argument2,Type3,Argument3,Type4,Argument4,Type5,Argument5,Type6,Argument6,Type7,Argument7,Type8,Argument8,Type9,Argument9,Type10,Argument10
 {
     ArgumentsNumber = 10
@@ -176,4 +157,4 @@ macro UEFI Entry*,Interface*,Function*,ParametersNumber*,Type1*,Argument1,Type2,
     else
         add rsp,0x20
     end if
-}
+} 

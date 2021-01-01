@@ -26,12 +26,12 @@ UEFIInitialize
 UEFI ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER
 
-UEFIGetStatusCode
+UEFIGetStatusCode [text1]
         
 UEFI BootServices,BootServices,GetMemoryMap,5, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize]
 
-UEFIGetStatusCode
+UEFIGetStatusCode [text2]
         
 mov rax,[MemoryMapSize]
 add qword [MemoryMapSize],rax
@@ -41,7 +41,7 @@ UEFI BootServices,BootServices,AllocatePool,3, \
         UEFI_ARGUMENT_TYPE_VALUE,[MemoryMapSize], \
         UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapAddress]
 
-UEFIGetStatusCode
+UEFIGetStatusCode [text3]
 
 UEFI BootServices,BootServices,GetMemoryMap,5, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize], \
@@ -50,7 +50,7 @@ UEFI BootServices,BootServices,GetMemoryMap,5, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorSize], \
         UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorVersion]
 
-UEFIGetStatusCode
+UEFIGetStatusCode [text2]
 
 jmp $
 
@@ -60,3 +60,6 @@ include "UEFI/Data/GUID.fasm"
 include "UEFI/Data/Protocols.fasm"
 include "UEFI/Data/SystemMessage.fasm"
 include "UEFI/Data/UEFI.fasm"
+text1: du "UEFI ClearScreen:",0xD,0xA,0x0
+text2: du "UEFI GetMemoryMap:",0xD,0xA,0x0
+text3: du "UEFI AllocatePool:",0xD,0xA,0x0

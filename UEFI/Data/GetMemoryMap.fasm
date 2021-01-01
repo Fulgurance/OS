@@ -1,4 +1,4 @@
-MemoryMapSize:              dq ?
+MemoryMapSize:              dq 0
 MemoryMapAddress:           dq ?
 MapKey:                     dq ?
 DescriptorSize:             dq ?

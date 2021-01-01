@@ -1,17 +1,33 @@
-macro UEFIGetStatusCode
+macro UEFIGetStatusCode Titled
 {
     mov rcx,UEFI_LOAD_ERROR
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFILoadError]
-    
+        
     @@:
     mov rcx,UEFI_INVALID_PARAMETER
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -22,6 +38,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIUnsupported]
@@ -30,6 +54,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_BAD_BUFFER_SIZE
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -40,6 +72,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIBufferTooSmall]
@@ -48,6 +88,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_NOT_READY
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -58,6 +106,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIDeviceError]
@@ -66,6 +122,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_WRITE_PROTECTED
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -76,6 +140,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIOutOfResources]
@@ -84,6 +156,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_VOLUME_CORRUPTED
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -94,6 +174,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIVolumeFull]
@@ -102,6 +190,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_NO_MEDIA
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -112,6 +208,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIMediaChanged]
@@ -120,6 +224,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_NOT_FOUND
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -130,6 +242,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIAccessDenied]
@@ -138,6 +258,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_NO_RESPONSE
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -148,6 +276,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINoMapping]
@@ -156,6 +292,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_TIMEOUT
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -166,6 +310,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFINotStarted]
@@ -174,6 +326,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_ALREADY_STARTED
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -184,6 +344,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIAborted]
@@ -192,6 +360,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_ICMP_ERROR
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -202,6 +378,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFITFTPError]
@@ -210,6 +394,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_PROTOCOL_ERROR
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -220,6 +412,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIIncompatibleVersion]
@@ -228,6 +428,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_SECURITY_VIOLATION
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -238,6 +446,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFICRCError]
@@ -246,6 +462,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_END_OF_MEDIA
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -256,6 +480,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIEndOfFile]
@@ -264,6 +496,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_INVALID_LANGUAGE
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -274,6 +514,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFICompromisedData]
@@ -282,6 +530,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_IP_ADDRESS_CONFLICT
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
@@ -292,6 +548,14 @@ macro UEFIGetStatusCode
     cmp rax,rcx
     jne @f
     
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
+    
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
         UEFI_ARGUMENT_TYPE_ADDRESS,[SystemMessage.UEFIHTTPError]
@@ -300,6 +564,14 @@ macro UEFIGetStatusCode
     mov rcx,UEFI_SUCCESS
     cmp rax,rcx
     jne @f
+    
+    if Titled eq
+    
+    else
+        UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \
+        UEFI_ARGUMENT_TYPE_ADDRESS,Titled
+    end if
     
     UEFI ConOut,SimpleTextOutputProtocol,OutputString,2, \
         UEFI_ARGUMENT_TYPE_INSTANCE_POINTER,0, \

@@ -1,0 +1,2 @@
+UEFIHandle:                 dq ?
+UEFISystemTable:            dq ?

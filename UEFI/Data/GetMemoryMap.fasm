@@ -1,0 +1,5 @@
+MemoryMapSize:              dq ?
+MemoryMapAddress:           dq ?
+MapKey:                     dq ?
+DescriptorSize:             dq ?
+DescriptorVersion:          dd ?

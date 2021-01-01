@@ -55,14 +55,8 @@ UEFIGetStatusCode
 jmp $
 
 section '.data' data readable writable
+include "UEFI/Data/GetMemoryMap.fasm"
 include "UEFI/Data/GUID.fasm"
 include "UEFI/Data/Protocols.fasm"
 include "UEFI/Data/SystemMessage.fasm"
-UEFIHandle:                 dq ?
-UEFISystemTable:            dq ?
-MemoryMapSize:              dq ?
-MemoryMapAddress:           dq ?
-MapKey:                     dq ?
-DescriptorSize:             dq ?
-DescriptorVersion:          dd ?
-PageDirectoryAddress:       dq ?
+include "UEFI/Data/UEFI.fasm"

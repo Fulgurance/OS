@@ -1,4 +1,6 @@
-macro Integer64 name
-    name = index
-    index = index + 128
-end macro
+struc Integer64
+
+    align 8
+    . dq ?
+
+end struc

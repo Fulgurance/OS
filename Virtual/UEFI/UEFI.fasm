@@ -1,4 +1,5 @@
 namespace UEFI
+
     include "DataTypes/DataTypes.fasm"
     include "AllocateTypes.fasm"
     include "ArgumentTypes.fasm"
@@ -12,4 +13,5 @@ namespace UEFI
     include "StatusCodes.fasm"
     include "SystemTable.fasm"
     include "TableHeader.fasm"
+    
 end namespace

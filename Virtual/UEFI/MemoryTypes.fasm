@@ -1,20 +1,22 @@
-namespace MemoryTypes
-    include "DataTypes/DataTypes.fasm"
-    DataTypes.IndexTable
-    DataTypes.Index ReservedMemoryType
-    DataTypes.Index LoaderCode
-    DataTypes.Index LoaderData
-    DataTypes.Index BootServicesCode
-    DataTypes.Index BootServicesData
-    DataTypes.Index RuntimeServicesCode
-    DataTypes.Index RuntimeServicesData
-    DataTypes.Index ConventionalMemory
-    DataTypes.Index UnusableMemory
-    DataTypes.Index ACPIReclaimMemory
-    DataTypes.Index ACPIMemoryNVS
-    DataTypes.Index MemoryMappedIO
-    DataTypes.Index MemoryMappedIOPortSpace
-    DataTypes.Index PalCode
-    DataTypes.Index PersistentMemory
-    DataTypes.Index MaxMemoryType
-end namespace
+struc MemoryTypes
+
+    .ReservedMemoryType      DataTypes.Index
+    .LoaderCode              DataTypes.Index
+    .LoaderData              DataTypes.Index
+    .BootServicesCode        DataTypes.Index
+    .BootServicesData        DataTypes.Index
+    .RuntimeServicesCode     DataTypes.Index
+    .RuntimeServicesData     DataTypes.Index
+    .ConventionalMemory      DataTypes.Index
+    .UnusableMemory          DataTypes.Index
+    .ACPIReclaimMemory       DataTypes.Index
+    .ACPIMemoryNVS           DataTypes.Index
+    .MemoryMappedIO          DataTypes.Index
+    .MemoryMappedIOPortSpace DataTypes.Index
+    .PalCode                 DataTypes.Index
+    .PersistentMemory        DataTypes.Index
+    .MaxMemoryType           DataTypes.Index
+
+end struc
+
+DataTypes.IndexTable MemoryTypes

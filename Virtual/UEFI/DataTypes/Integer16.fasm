@@ -1,4 +1,6 @@
-macro Integer16 name
-    name = index
-    index = index + 32
-end macro
+struc Integer16
+
+    align 2
+    . dw ?
+
+end struc

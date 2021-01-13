@@ -1,4 +1,6 @@
-macro Integer32 name
-    name = index
-    index = index + 64
-end macro
+struc Integer32
+
+    align 4
+    . dd ?
+
+end struc

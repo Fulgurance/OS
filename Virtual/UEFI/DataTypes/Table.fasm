@@ -1,8 +1,7 @@
-macro IndexTable name
+macro Table name
 
     virtual at 0
-    index = 0
     name name
     end virtual
-    
+
 end macro

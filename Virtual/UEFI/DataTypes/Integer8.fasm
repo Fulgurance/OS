@@ -1,4 +1,5 @@
-macro Integer8 name
-    name = index
-    index = index + 8
-end macro
+struc Integer8
+
+    . db ?
+
+end struc

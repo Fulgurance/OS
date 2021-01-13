@@ -1,8 +1,10 @@
-namespace AllocateTypes
-    include "DataTypes/DataTypes.fasm"
-    DataTypes.IndexTable
-    DataTypes.Index   AllocateAnyPages      
-    DataTypes.Index   AllocateMaxAddress    
-    DataTypes.Index   AllocateAddress       
-    DataTypes.Index   AllocateMaxAllocateType       
-end namespace
+struc AllocateTypes
+
+    .AllocateAnyPages   DataTypes.Index
+    .AllocateMaxAddress DataTypes.Index
+    .AllocateAddress    DataTypes.Index
+    .MaxAllocateType    DataTypes.Index
+
+end struc
+
+DataTypes.IndexTable AllocateTypes

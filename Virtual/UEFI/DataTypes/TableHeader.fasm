@@ -1,4 +1,0 @@
-macro TableHeader name
-    name = index
-    index = index + 192    
-end macro

@@ -1,4 +1,6 @@
-macro Index name
-        name = index
-        index = index + 1
-end macro
+struc Index
+
+    . = index
+    index = index + 1
+    
+end struc

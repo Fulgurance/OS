@@ -1,17 +1,19 @@
-namespace SystemTable
-    include "DataTypes/DataTypes.fasm"
-    DataTypes.IndexTable
-    DataTypes.TableHeader   Hdr
-    DataTypes.Integer64     FirmwareVendor
-    DataTypes.Integer32     FirmwareRevision
-    DataTypes.Integer64     ConsoleInHandle
-    DataTypes.Integer64     ConIn
-    DataTypes.Integer64     ConsoleOutHandle
-    DataTypes.Integer64     ConOut
-    DataTypes.Integer64     StandardErrorHandle
-    DataTypes.Integer64     StdErr
-    DataTypes.Integer64     RuntimeServices
-    DataTypes.Integer64     BootServices
-    DataTypes.Integer64     NumberOfTableEntries
-    DataTypes.Integer64     ConfigurationTable
-end namespace
+struc SystemTable
+
+    .Hdr                        TableHeader
+    .FirmwareVendor             DataTypes.Integer64
+    .FirmwareRevision           DataTypes.Integer32
+    .ConsoleInHandle            DataTypes.Integer64
+    .ConIn                      DataTypes.Integer64
+    .ConsoleOutHandle           DataTypes.Integer64
+    .ConOut                     DataTypes.Integer64
+    .StandardErrorHandle        DataTypes.Integer64
+    .StdErr                     DataTypes.Integer64
+    .RuntimeServices            DataTypes.Integer64
+    .BootServices               DataTypes.Integer64
+    .NumberOfTableEntries       DataTypes.Integer64
+    .ConfigurationTable         DataTypes.Integer64
+
+end struc
+
+DataTypes.Table SystemTable

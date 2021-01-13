@@ -1,7 +1,9 @@
-namespace LocateSearchTypes
-    include "DataTypes/DataTypes.fasm"
-    DataTypes.IndexTable
-    DataTypes.Index AllHandles
-    DataTypes.Index ByRegisterNotif
-    DataTypes.Index ByProtocol
-end namespace
+struc LocateSearchTypes
+
+    .AllHandles         DataTypes.Index
+    .ByRegisterNotify   DataTypes.Index
+    .ByProtocol         DataTypes.Index
+
+end struc
+
+DataTypes.IndexTable LocateSearchTypes

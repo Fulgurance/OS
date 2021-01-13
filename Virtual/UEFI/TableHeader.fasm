@@ -1,9 +1,11 @@
-namespace TableHeader
-    include "DataTypes/DataTypes.fasm"
-    DataTypes.IndexTable
-    DataTypes.Integer64 Signature     
-    DataTypes.Integer32 Revision      
-    DataTypes.Integer32 HeaderSize    
-    DataTypes.Integer32 CRC32         
-    DataTypes.Integer32 Reserved      
-end namespace
+struc TableHeader
+
+    .Signature     DataTypes.Integer64
+    .Revision      DataTypes.Integer32
+    .HeaderSize    DataTypes.Integer32
+    .CRC32         DataTypes.Integer32
+    .Reserved      DataTypes.Integer32
+
+end struc
+
+DataTypes.Table TableHeader

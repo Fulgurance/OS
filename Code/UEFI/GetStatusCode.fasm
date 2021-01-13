@@ -1,0 +1,583 @@
+macro GetStatusCode Titled
+    
+    LoadError:
+    mov rcx,Virtual.UEFI.StatusCodes.LoadError
+    cmp rax,rcx
+    jne InvalidParameter
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.LoadError]
+            
+    InvalidParameter:
+    mov rcx,Virtual.UEFI.StatusCodes.InvalidParameter
+    cmp rax,rcx
+    jne Unsupported
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.InvalidParameter]
+        
+    Unsupported:
+    mov rcx,Virtual.UEFI.StatusCodes.Unsupported
+    cmp rax,rcx
+    jne BadBufferSize
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.Unsupported]
+        
+    BadBufferSize:
+    mov rcx,Virtual.UEFI.StatusCodes.BadBufferSize
+    cmp rax,rcx
+    jne BufferTooSmall
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.BadBufferSize]
+        
+    BufferTooSmall:
+    mov rcx,Virtual.UEFI.StatusCodes.BufferTooSmall
+    cmp rax,rcx
+    jne NotReady
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.BufferTooSmall]
+        
+    NotReady:
+    mov rcx,Virtual.UEFI.StatusCodes.NotReady
+    cmp rax,rcx
+    jne DeviceError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NotReady]
+        
+    DeviceError:
+    mov rcx,Virtual.UEFI.StatusCodes.DeviceError
+    cmp rax,rcx
+    jne WriteProtected
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.DeviceError]
+        
+    WriteProtected:
+    mov rcx,Virtual.UEFI.StatusCodes.WriteProtected
+    cmp rax,rcx
+    jne OutOfResources
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.WriteProtected]
+        
+    OutOfResources:
+    mov rcx,Virtual.UEFI.StatusCodes.OutOfResources
+    cmp rax,rcx
+    jne VolumeCorrupted
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.OutOfResources]
+        
+    VolumeCorrupted:
+    mov rcx,Virtual.UEFI.StatusCodes.VolumeCorrupted
+    cmp rax,rcx
+    jne VolumeFull
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.VolumeCorrupted]
+        
+    VolumeFull:
+    mov rcx,Virtual.UEFI.StatusCodes.VolumeFull
+    cmp rax,rcx
+    jne NoMedia
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.VolumeFull]
+        
+    NoMedia:
+    mov rcx,Virtual.UEFI.StatusCodes.NoMedia
+    cmp rax,rcx
+    jne MediaChanged
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NoMedia]
+        
+    MediaChanged:
+    mov rcx,Virtual.UEFI.StatusCodes.MediaChanged
+    cmp rax,rcx
+    jne NotFound
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.MediaChanged]
+        
+    NotFound:
+    mov rcx,Virtual.UEFI.StatusCodes.NotFound
+    cmp rax,rcx
+    jne AccessDenied
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NotFound]
+        
+    AccessDenied:
+    mov rcx,Virtual.UEFI.StatusCodes.AccessDenied
+    cmp rax,rcx
+    jne NoResponse
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.AccessDenied]
+        
+    NoResponse:
+    mov rcx,Virtual.UEFI.StatusCodes.NoResponse
+    cmp rax,rcx
+    jne NoMapping
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NoResponse]
+        
+    NoMapping:
+    mov rcx,Virtual.UEFI.StatusCodes.NoMapping
+    cmp rax,rcx
+    jne TimeOut
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NoMapping]
+        
+    TimeOut:
+    mov rcx,Virtual.UEFI.StatusCodes.TimeOut
+    cmp rax,rcx
+    jne NotStarted
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.TimeOut]
+        
+    NotStarted:
+    mov rcx,Virtual.UEFI.StatusCodes.NotStarted
+    cmp rax,rcx
+    jne AlreadyStarted
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.NotStarted]
+        
+    AlreadyStarted:
+    mov rcx,Virtual.UEFI.StatusCodes.AlreadyStarted
+    cmp rax,rcx
+    jne Aborted
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.AlreadyStarted]
+        
+    Aborted:
+    mov rcx,Virtual.UEFI.StatusCodes.Aborted
+    cmp rax,rcx
+    jne ICMPError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.Aborted]
+        
+    ICMPError:
+    mov rcx,Virtual.UEFI.StatusCodes.ICMPError
+    cmp rax,rcx
+    jne TFTPError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.ICMPError]
+        
+    TFTPError:
+    mov rcx,Virtual.UEFI.StatusCodes.TFTPError
+    cmp rax,rcx
+    jne ProtocolError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.TFTPError]
+        
+    ProtocolError:
+    mov rcx,Virtual.UEFI.StatusCodes.ProtocolError
+    cmp rax,rcx
+    jne IncompatibleVersion
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.ProtocolError]
+        
+    IncompatibleVersion:
+    mov rcx,Virtual.UEFI.StatusCodes.IncompatibleVersion
+    cmp rax,rcx
+    jne SecurityViolation
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.IncompatibleVersion]
+        
+    SecurityViolation:
+    mov rcx,Virtual.UEFI.StatusCodes.SecurityViolation
+    cmp rax,rcx
+    jne CRCError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.SecurityViolation]
+        
+    CRCError:
+    mov rcx,Virtual.UEFI.StatusCodes.CRCError
+    cmp rax,rcx
+    jne EndOfMedia
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.CRCError]
+        
+    EndOfMedia:
+    mov rcx,Virtual.UEFI.StatusCodes.EndOfMedia
+    cmp rax,rcx
+    jne EndOfFile
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.EndOfMedia]
+        
+    EndOfFile:
+    mov rcx,Virtual.UEFI.StatusCodes.EndOfFile
+    cmp rax,rcx
+    jne InvalidLanguage
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.EndOfFile]
+        
+    InvalidLanguage:
+    mov rcx,Virtual.UEFI.StatusCodes.InvalidLanguage
+    cmp rax,rcx
+    jne CompromisedData
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.InvalidLanguage]
+        
+    CompromisedData:
+    mov rcx,Virtual.UEFI.StatusCodes.CompromisedData
+    cmp rax,rcx
+    jne IPAddressConflict
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.CompromisedData]
+        
+    IPAddressConflict:
+    mov rcx,Virtual.UEFI.StatusCodes.IPAddressConflict
+    cmp rax,rcx
+    jne HTTPError
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.IPAddressConflict]
+        
+    HTTPError:
+    mov rcx,Virtual.UEFI.StatusCodes.HTTPError
+    cmp rax,rcx
+    jne Success
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.HTTPError]
+        
+    Success:
+    mov rcx,Virtual.UEFI.StatusCodes.Success
+    cmp rax,rcx
+    jne Exit
+        
+    match , Titled
+        
+    else
+        Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                        InstancePointer,0, \
+                        Address,Titled
+    end match
+        
+    Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+                    InstancePointer,0, \
+                    Address,[Data.UEFI.StatusCodeMessages.Success]
+        
+    Exit:
+    
+end macro

@@ -1,0 +1,14 @@
+namespace SimpleTextOutputProtocol
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Integer64 Reset
+    DataTypes.Integer64 OutputString
+    DataTypes.Integer64 TestString
+    DataTypes.Integer64 QueryMode
+    DataTypes.Integer64 SetMode
+    DataTypes.Integer64 SetAttribute
+    DataTypes.Integer64 ClearScreen
+    DataTypes.Integer64 SetCursorPosition
+    DataTypes.Integer64 EnableCursor
+    DataTypes.Integer64 Mode
+end namespace

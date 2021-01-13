@@ -1,0 +1,7 @@
+namespace ArgumentTypes
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Index Address
+    DataTypes.Index Value             
+    DataTypes.Index InstancePointer
+end namespace

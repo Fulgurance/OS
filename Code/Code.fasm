@@ -1,0 +1,5 @@
+namespace Code
+
+    include "UEFI/UEFI.fasm"
+
+end namespace

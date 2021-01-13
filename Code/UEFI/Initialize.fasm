@@ -1,0 +1,7 @@
+macro Initialize
+
+    mov [Data.UEFI.Handle],rcx
+    mov [Data.UEFI.SystemTable],rdx
+    push rbp
+    
+end macro

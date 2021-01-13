@@ -1,6 +1,0 @@
-macro UEFIInitialize
-{
-    mov [UEFIHandle],rcx
-    mov [UEFISystemTable],rdx
-    push rbp
-}

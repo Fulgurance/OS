@@ -1,0 +1,15 @@
+namespace UEFI
+    include "DataTypes/DataTypes.fasm"
+    include "AllocateTypes.fasm"
+    include "ArgumentTypes.fasm"
+    include "BootServices.fasm"
+    include "GraphicsOutputBltOperations.fasm"
+    include "GraphicsOutputProtocol.fasm"
+    include "LocateSearchTypes.fasm"
+    include "MemoryDescriptor.fasm"
+    include "MemoryTypes.fasm"
+    include "SimpleTextOutputProtocol.fasm"
+    include "StatusCodes.fasm"
+    include "SystemTable.fasm"
+    include "TableHeader.fasm"
+end namespace

@@ -1,0 +1,11 @@
+namespace DataTypes
+
+    include "Index.fasm"
+    include "IndexTable.fasm"
+    include "Integer8.fasm"
+    include "Integer16.fasm"
+    include "Integer32.fasm"
+    include "Integer64.fasm"
+    include "TableHeader.fasm"
+    
+end namespace

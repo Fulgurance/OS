@@ -1,0 +1,3 @@
+macro IndexTable
+    index = 0
+end macro

@@ -1,0 +1,40 @@
+StatusCodeMessages:
+
+namespace StatusCodeMessages
+
+    Success:               dw "The operation completed successfully",0xD,0xA,0x0
+    LoadError:             dw "The image failed to load",0xD,0xA,0x0
+    InvalidParameter:      dw "A parameter was incorrect",0xD,0xA,0x0
+    Unsupported:           dw "The operation is not supported",0xD,0xA,0x0
+    BadBufferSize:         dw "The buffer was not the proper size for the request",0xD,0xA,0x0
+    BufferTooSmall:        dw "The buffer is not large enough to hold the requested data",0xD,0xA,0x0
+    NotReady:              dw "There is no data pending upon return",0xD,0xA,0x0
+    DeviceError:           dw "The physical device reported an error while attempting the operation",0xD,0xA,0x0
+    WriteProtected:        dw "The device cannot be written to",0xD,0xA,0x0
+    OutOfResources:        dw "A resource has run out",0xD,0xA,0x0
+    VolumeCorrupted:       dw "An inconstancy was detected on the file system causing the operating to fail",0xD,0xA,0x0
+    VolumeFull:            dw "There is no more space on the file system",0xD,0xA,0x0
+    NoMedia:               dw "The device does not contain any medium to perform the operation",0xD,0xA,0x0
+    MediaChanged:          dw "The medium in the device has changed since the last access",0xD,0xA,0x0
+    NotFound:              dw "The item was not found",0xD,0xA,0x0
+    AccessDenied:          dw "Access was denied",0xD,0xA,0x0
+    NoResponse:            dw "The server was not found or did not respond to the request",0xD,0xA,0x0
+    NoMapping:             dw "A mapping to a device does not exist",0xD,0xA,0x0
+    TimeOut:               dw "The timeout time expired. ",0xD,0xA,0x0
+    NotStarted:            dw "The protocol has not been started",0xD,0xA,0x0
+    AlreadyStarted:        dw "The protocol has already been started",0xD,0xA,0x0
+    Aborted:               dw "The operation was aborted",0xD,0xA,0x0
+    ICMPError:             dw "An ICMP error occurred during the network operation",0xD,0xA,0x0
+    TFTPError:             dw "A TFTP error occurred during the network operation",0xD,0xA,0x0
+    ProtocolError:         dw "A protocol error occurred during the network operation",0xD,0xA,0x0
+    IncompatibleVersion:   dw "The function encountered an internal version that was incompatible with a version requested by the caller",0xD,0xA,0x0
+    SecurityViolation:     dw "The function was not performed due to a security violation",0xD,0xA,0x0
+    CRCError:              dw "A CRC error was detected",0xD,0xA,0x0
+    EndOfMedia:            dw "Beginning or end of media was reached",0xD,0xA,0x0
+    EndOfFile:             dw "The end of the file was reached",0xD,0xA,0x0
+    InvalidLanguage:       dw "The language specified was invalid",0xD,0xA,0x0
+    CompromisedData:       dw "The security status of the data is unknown or compromised",0xD,0xA,0x0
+    IPAddressConflict:     dw "There is an address conflict address allocation",0xD,0xA,0x0
+    HTTPError:             dw "A HTTP error occurred during the network operation",0xD,0xA,0x0
+    
+end namespace

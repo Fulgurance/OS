@@ -1,0 +1,9 @@
+namespace MemoryDescriptor
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Integer32 Type
+    DataTypes.Integer64 PhysicalStart
+    DataTypes.Integer64 VirtualStart
+    DataTypes.Integer64 NumberOfPages
+    DataTypes.Integer64 Attribute
+end namespace

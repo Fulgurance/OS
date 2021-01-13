@@ -1,0 +1,161 @@
+macro Call Entry*,Interface*,Function*,ParametersNumber*,Type1*,Argument1,Type2,Argument2,Type3,Argument3,Type4,Argument4,Type5,Argument5,Type6,Argument6,Type7,Argument7,Type8,Argument8,Type9,Argument9,Type10,Argument10
+
+    ArgumentsNumber = 10
+    match , Argument10
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument9
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument8
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument7
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument6
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument5
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument4
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument3
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument2
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    match , Argument1
+        ArgumentsNumber = ArgumentsNumber-1
+    end match
+    
+    if ParametersNumber > 4
+        sub rsp,ParametersNumber*8
+    else
+        sub rsp,0x20
+    end if
+
+    mov rdx,[Data.UEFI.SystemTable]
+    mov rcx,[rdx+Virtual.UEFI.SystemTable.#Entry]
+    mov rax,[rcx+Virtual.UEFI.#Interface#.#Function]
+    
+    if ArgumentsNumber > 0
+        match , Argument1
+            if Virtual.UEFI.ArgumentTypes.#Type1 != Virtual.UEFI.ArgumentTypes.InstancePointer
+                xor rcx,rcx
+            end if
+        else 
+            if Virtual.UEFI.ArgumentTypes.#Type1 = Virtual.UEFI.ArgumentTypes.InstancePointer
+        
+            else 
+                if Virtual.UEFI.ArgumentTypes.#Type1 = Virtual.UEFI.ArgumentTypes.Address
+                    lea rcx,Argument1
+                else
+                    mov rcx,Argument1
+                end if
+            end if
+        end match
+    end if
+    
+    if ArgumentsNumber > 1
+        match , Argument2
+            xor rdx,rdx
+        else 
+            if Virtual.UEFI.ArgumentTypes.#Type2 = Virtual.UEFI.ArgumentTypes.Address
+                lea rdx,Argument2
+            else
+                mov rdx,Argument2
+            end if
+        end match
+    end if
+    
+    if ArgumentsNumber > 2
+        match , Argument3
+            xor r8,r8
+        else 
+            if Virtual.UEFI.ArgumentTypes.#Type3 = Virtual.UEFI.ArgumentTypes.Address
+                lea r8,Argument3
+            else
+                mov r8,Argument3
+            end if
+        end match
+    end if
+    
+    if ArgumentsNumber > 3
+        match , Argument4
+            xor r9,r9
+        else 
+            if Virtual.UEFI.ArgumentTypes.#Type4 = Virtual.UEFI.ArgumentTypes.Address
+                lea r9,Argument4
+            else
+                mov r9,Argument4
+            end if
+        end match
+    end if
+    
+    if ArgumentsNumber > 4
+        if Virtual.UEFI.ArgumentTypes.#Type5 = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument5
+            mov qword[rsp + 8*4],r10
+        else
+            mov qword[rsp + 8*4],r10
+        end if
+    end if
+    
+    if ArgumentsNumber > 5
+        if Virtual.UEFI.ArgumentTypes.#Type = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument6
+            mov qword[rsp + 8*5],r10
+        else
+            mov qword[rsp + 8*5],r10
+        end if
+    end if
+    
+    if ArgumentsNumber > 6
+        if Virtual.UEFI.ArgumentTypes.#Type7 = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument7
+            mov qword[rsp + 8*6],r10
+        else
+            mov qword[rsp + 8*6],r10
+        end if
+    end if
+    
+    if ArgumentsNumber > 7
+        if Virtual.UEFI.ArgumentTypes.#Type8 = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument8
+            mov qword[rsp + 8*7],r10
+        else
+            mov qword[rsp + 8*7],r10
+        end if
+    end if
+    
+    if ArgumentsNumber > 8
+        if Virtual.UEFI.ArgumentTypes.#Type9 = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument9
+            mov qword[rsp + 8*8],r10
+        else
+            mov qword[rsp + 8*8],r10
+        end if
+    end if
+    
+    if ArgumentsNumber > 9
+        if Virtual.UEFI.ArgumentTypes.#Type10 = Virtual.UEFI.ArgumentTypes.Address
+            lea r10,Argument10
+            mov qword[rsp + 8*9],r10
+        else
+            mov qword[rsp + 8*9],r10
+        end if
+    end if
+    
+    call rax
+
+    if ParametersNumber > 4
+        add rsp,ParametersNumber*8
+    else
+        add rsp,0x20
+    end if
+    
+end macro

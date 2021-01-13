@@ -1,0 +1,9 @@
+namespace GraphicsOutputBltOperations
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Index VideoFill
+    DataTypes.Index VideoToBltBuffer
+    DataTypes.Index BufferToVideo
+    DataTypes.Index VideoToVideo
+    DataTypes.Index OperationMax
+end namespace

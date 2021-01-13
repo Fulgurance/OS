@@ -1,0 +1,8 @@
+namespace AllocateTypes
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Index   AllocateAnyPages      
+    DataTypes.Index   AllocateMaxAddress    
+    DataTypes.Index   AllocateAddress       
+    DataTypes.Index   AllocateMaxAllocateType       
+end namespace

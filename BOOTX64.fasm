@@ -1,65 +1,59 @@
-format pe64 efi
+include "FASMG/format/format.inc"
+
+format PE64 EFI
 entry Bootx64
 
-include "UEFI/Virtual/ArgumentTypes.fasm"
-include "UEFI/Virtual/DataTypes.fasm"
-include "UEFI/Virtual/StatusCodes.fasm"
-include "UEFI/Virtual/IndexTables/AllocateType.fasm"
-include "UEFI/Virtual/IndexTables/GraphicsOutputBltOperation.fasm"
-include "UEFI/Virtual/IndexTables/LocateSearchType.fasm"
-include "UEFI/Virtual/IndexTables/MemoryType.fasm"
-include "UEFI/Virtual/Tables/TableHeader.fasm"
-include "UEFI/Virtual/Tables/BootServices.fasm"
-include "UEFI/Virtual/Tables/GraphicsOutputProtocol.fasm"
-include "UEFI/Virtual/Tables/MemoryDescriptor.fasm"
-include "UEFI/Virtual/Tables/SimpleTextOutputProtocol.fasm"
-include "UEFI/Virtual/Tables/SystemTable.fasm"
+include "Virtual/Virtual.fasm"
 
 section '.text' code readable executable
-include "UEFI/Code/UEFI.fasm"
-include "UEFI/Code/GetStatusCodes.fasm"
-include "UEFI/Code/Initialize.fasm"
+
+include "Code/Code.fasm"
 
 Bootx64:
-UEFIInitialize
+Code.UEFI.Initialize
 
-UEFI ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
-        UEFI_ARGUMENT_TYPE_INSTANCE_POINTER
+Code.UEFI.Call ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
+        InstancePointer
 
-UEFIGetStatusCode [text1]
+Code.UEFI.GetStatusCode [text1]
         
-UEFI BootServices,BootServices,GetMemoryMap,5, \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize]
+Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapSize]
 
-UEFIGetStatusCode [text2]
+Code.UEFI.GetStatusCode [text2]
         
-mov rax,[MemoryMapSize]
-add qword [MemoryMapSize],rax
+mov rax,[Data.UEFI.GetMemoryMap.MemoryMapSize]
+add qword [Data.UEFI.GetMemoryMap.MemoryMapSize],rax
 
-UEFI BootServices,BootServices,AllocatePool,3, \
-        UEFI_ARGUMENT_TYPE_VALUE,MemoryType.LoaderData, \
-        UEFI_ARGUMENT_TYPE_VALUE,[MemoryMapSize], \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapAddress]
+Code.UEFI.Call BootServices,BootServices,AllocatePool,3, \
+        Value,MemoryType.LoaderData, \
+        Value,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapAddress]
 
-UEFIGetStatusCode [text3]
+Code.UEFI.GetStatusCode [text3]
 
-UEFI BootServices,BootServices,GetMemoryMap,5, \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[MemoryMapSize], \
-        UEFI_ARGUMENT_TYPE_VALUE,[MemoryMapAddress], \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[MapKey], \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorSize], \
-        UEFI_ARGUMENT_TYPE_ADDRESS,[DescriptorVersion]
+Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
+        Value,[Data.UEFI.GetMemoryMap.MemoryMapAddress], \
+        Address,[Data.UEFI.GetMemoryMap.MapKey], \
+        Address,[Data.UEFI.GetMemoryMap.DescriptorSize], \
+        Address,[Data.UEFI.GetMemoryMap.DescriptorVersion]
 
-UEFIGetStatusCode [text2]
+Code.UEFI.GetStatusCode [text2]
+
+Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
+        InstancePointer,0, \
+        Address,[text4]
+        
+Code.UEFI.GetStatusCode [text4]
 
 jmp $
 
 section '.data' data readable writable
-include "UEFI/Data/GetMemoryMap.fasm"
-include "UEFI/Data/GUID.fasm"
-include "UEFI/Data/Protocols.fasm"
-include "UEFI/Data/SystemMessage.fasm"
-include "UEFI/Data/UEFI.fasm"
-text1: du "UEFI ClearScreen:",0xD,0xA,0x0
-text2: du "UEFI GetMemoryMap:",0xD,0xA,0x0
-text3: du "UEFI AllocatePool:",0xD,0xA,0x0
+
+include "Data/Data.fasm"
+
+text1: dw "UEFI ClearScreen:",0xD,0xA,0x0
+text2: dw "UEFI GetMemoryMap:",0xD,0xA,0x0
+text3: dw "UEFI AllocatePool:",0xD,0xA,0x0
+text4: dw "UEFI OutputString:",0xD,0xA,0x0

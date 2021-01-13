@@ -1,0 +1,7 @@
+Data:
+
+namespace Data
+
+    include "UEFI/UEFI.fasm"
+    
+end namespace

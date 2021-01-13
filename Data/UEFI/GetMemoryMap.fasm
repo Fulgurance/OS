@@ -1,0 +1,11 @@
+GetMemoryMap:
+
+namespace GetMemoryMap
+
+    MemoryMapSize:       dq ?
+    MemoryMapAddress:    dq ?
+    MapKey:              dq ?
+    DescriptorSize:      dq ?
+    DescriptorVersion:   dd ?
+    
+end namespace

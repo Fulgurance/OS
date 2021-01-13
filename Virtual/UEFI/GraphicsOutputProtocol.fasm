@@ -1,0 +1,8 @@
+namespace GraphicsOutputProtocol
+    include "DataTypes/DataTypes.fasm"
+    DataTypes.IndexTable
+    DataTypes.Integer64 QueryMode
+    DataTypes.Integer64 SetMode
+    DataTypes.Integer64 Blt
+    DataTypes.Integer64 Mode
+end namespace

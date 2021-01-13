@@ -1,0 +1,12 @@
+UEFI:
+
+namespace UEFI
+
+    include "GetMemoryMap.fasm"
+    include "GUID.fasm"
+    include "Handle.fasm"
+    include "Protocols.fasm"
+    include "StatusCodeMessages.fasm"
+    include "SystemTable.fasm"
+    
+end namespace

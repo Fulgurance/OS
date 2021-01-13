@@ -1,0 +1,4 @@
+macro Index name
+        name = index
+        index = index + 1
+end macro

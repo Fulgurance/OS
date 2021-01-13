@@ -1,0 +1,37 @@
+namespace StatusCodes
+    Success             = 0x0
+    Error               = 0x8000000000000000
+    LoadError           = Error or 1
+    InvalidParameter    = Error or 2
+    Unsupported         = Error or 3
+    BadBufferSize       = Error or 4
+    BufferTooSmall      = Error or 5
+    NotReady            = Error or 6
+    DeviceError         = Error or 7
+    WriteProtected      = Error or 8
+    OutOfResources      = Error or 9
+    VolumeCorrupted     = Error or 10
+    VolumeFull          = Error or 11
+    NoMedia             = Error or 12
+    MediaChanged        = Error or 13
+    NotFound            = Error or 14
+    AccessDenied        = Error or 15
+    NoResponse          = Error or 16
+    NoMapping           = Error or 17
+    TimeOut             = Error or 18
+    NotStarted          = Error or 19
+    AlreadyStarted      = Error or 20
+    Aborted             = Error or 21
+    ICMPError           = Error or 22
+    TFTPError           = Error or 23
+    ProtocolError       = Error or 24
+    IncompatibleVersion = Error or 25
+    SecurityViolation   = Error or 26
+    CRCError            = Error or 27
+    EndOfMedia          = Error or 28
+    EndOfFile           = Error or 31
+    InvalidLanguage     = Error or 32
+    CompromisedData     = Error or 33
+    IPAddressConflict   = Error or 34
+    HTTPError           = Error or 35
+end namespace

@@ -1,0 +1,4 @@
+macro Integer32 name
+    name = index
+    index = index + 64
+end macro

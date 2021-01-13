@@ -1,0 +1,7 @@
+namespace UEFI
+
+    include "Call.fasm"
+    include "GetStatusCode.fasm"
+    include "Initialize.fasm"
+
+end namespace

@@ -1,9 +1,0 @@
-struc GraphicsOutputProtocol
-{
-    .QueryMode  Integer64
-    .SetMode    Integer64
-    .Blt        Integer64
-    .Mode       Integer64
-}
-
-Table GraphicsOutputProtocol

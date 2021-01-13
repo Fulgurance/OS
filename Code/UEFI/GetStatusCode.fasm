@@ -1,9 +1,8 @@
 macro GetStatusCode Titled
     
-    LoadError:
     mov rcx,Virtual.UEFI.StatusCodes.LoadError
     cmp rax,rcx
-    jne InvalidParameter
+    jne @f
         
     match , Titled
         
@@ -17,10 +16,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.LoadError]
             
-    InvalidParameter:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.InvalidParameter
     cmp rax,rcx
-    jne Unsupported
+    jne @f
         
     match , Titled
         
@@ -34,10 +33,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.InvalidParameter]
         
-    Unsupported:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.Unsupported
     cmp rax,rcx
-    jne BadBufferSize
+    jne @f
         
     match , Titled
         
@@ -51,10 +50,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.Unsupported]
         
-    BadBufferSize:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.BadBufferSize
     cmp rax,rcx
-    jne BufferTooSmall
+    jne @f
         
     match , Titled
         
@@ -68,10 +67,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.BadBufferSize]
         
-    BufferTooSmall:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.BufferTooSmall
     cmp rax,rcx
-    jne NotReady
+    jne @f
         
     match , Titled
         
@@ -85,10 +84,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.BufferTooSmall]
         
-    NotReady:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NotReady
     cmp rax,rcx
-    jne DeviceError
+    jne @f
         
     match , Titled
         
@@ -102,10 +101,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NotReady]
         
-    DeviceError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.DeviceError
     cmp rax,rcx
-    jne WriteProtected
+    jne @f
         
     match , Titled
         
@@ -119,10 +118,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.DeviceError]
         
-    WriteProtected:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.WriteProtected
     cmp rax,rcx
-    jne OutOfResources
+    jne @f
         
     match , Titled
         
@@ -136,10 +135,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.WriteProtected]
         
-    OutOfResources:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.OutOfResources
     cmp rax,rcx
-    jne VolumeCorrupted
+    jne @f
         
     match , Titled
         
@@ -153,10 +152,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.OutOfResources]
         
-    VolumeCorrupted:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.VolumeCorrupted
     cmp rax,rcx
-    jne VolumeFull
+    jne @f
         
     match , Titled
         
@@ -170,10 +169,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.VolumeCorrupted]
         
-    VolumeFull:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.VolumeFull
     cmp rax,rcx
-    jne NoMedia
+    jne @f
         
     match , Titled
         
@@ -187,10 +186,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.VolumeFull]
         
-    NoMedia:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NoMedia
     cmp rax,rcx
-    jne MediaChanged
+    jne @f
         
     match , Titled
         
@@ -204,10 +203,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NoMedia]
         
-    MediaChanged:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.MediaChanged
     cmp rax,rcx
-    jne NotFound
+    jne @f
         
     match , Titled
         
@@ -221,10 +220,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.MediaChanged]
         
-    NotFound:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NotFound
     cmp rax,rcx
-    jne AccessDenied
+    jne @f
         
     match , Titled
         
@@ -238,10 +237,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NotFound]
         
-    AccessDenied:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.AccessDenied
     cmp rax,rcx
-    jne NoResponse
+    jne @f
         
     match , Titled
         
@@ -255,10 +254,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.AccessDenied]
         
-    NoResponse:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NoResponse
     cmp rax,rcx
-    jne NoMapping
+    jne @f
         
     match , Titled
         
@@ -272,10 +271,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NoResponse]
         
-    NoMapping:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NoMapping
     cmp rax,rcx
-    jne TimeOut
+    jne @f
         
     match , Titled
         
@@ -289,10 +288,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NoMapping]
         
-    TimeOut:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.TimeOut
     cmp rax,rcx
-    jne NotStarted
+    jne @f
         
     match , Titled
         
@@ -306,10 +305,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.TimeOut]
         
-    NotStarted:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.NotStarted
     cmp rax,rcx
-    jne AlreadyStarted
+    jne @f
         
     match , Titled
         
@@ -323,10 +322,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.NotStarted]
         
-    AlreadyStarted:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.AlreadyStarted
     cmp rax,rcx
-    jne Aborted
+    jne @f
         
     match , Titled
         
@@ -340,10 +339,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.AlreadyStarted]
         
-    Aborted:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.Aborted
     cmp rax,rcx
-    jne ICMPError
+    jne @f
         
     match , Titled
         
@@ -357,10 +356,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.Aborted]
         
-    ICMPError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.ICMPError
     cmp rax,rcx
-    jne TFTPError
+    jne @f
         
     match , Titled
         
@@ -374,10 +373,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.ICMPError]
         
-    TFTPError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.TFTPError
     cmp rax,rcx
-    jne ProtocolError
+    jne @f
         
     match , Titled
         
@@ -391,10 +390,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.TFTPError]
         
-    ProtocolError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.ProtocolError
     cmp rax,rcx
-    jne IncompatibleVersion
+    jne @f
         
     match , Titled
         
@@ -408,10 +407,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.ProtocolError]
         
-    IncompatibleVersion:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.IncompatibleVersion
     cmp rax,rcx
-    jne SecurityViolation
+    jne @f
         
     match , Titled
         
@@ -425,10 +424,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.IncompatibleVersion]
         
-    SecurityViolation:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.SecurityViolation
     cmp rax,rcx
-    jne CRCError
+    jne @f
         
     match , Titled
         
@@ -442,10 +441,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.SecurityViolation]
         
-    CRCError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.CRCError
     cmp rax,rcx
-    jne EndOfMedia
+    jne @f
         
     match , Titled
         
@@ -459,10 +458,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.CRCError]
         
-    EndOfMedia:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.EndOfMedia
     cmp rax,rcx
-    jne EndOfFile
+    jne @f
         
     match , Titled
         
@@ -476,10 +475,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.EndOfMedia]
         
-    EndOfFile:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.EndOfFile
     cmp rax,rcx
-    jne InvalidLanguage
+    jne @f
         
     match , Titled
         
@@ -493,10 +492,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.EndOfFile]
         
-    InvalidLanguage:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.InvalidLanguage
     cmp rax,rcx
-    jne CompromisedData
+    jne @f
         
     match , Titled
         
@@ -510,10 +509,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.InvalidLanguage]
         
-    CompromisedData:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.CompromisedData
     cmp rax,rcx
-    jne IPAddressConflict
+    jne @f
         
     match , Titled
         
@@ -527,10 +526,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.CompromisedData]
         
-    IPAddressConflict:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.IPAddressConflict
     cmp rax,rcx
-    jne HTTPError
+    jne @f
         
     match , Titled
         
@@ -544,10 +543,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.IPAddressConflict]
         
-    HTTPError:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.HTTPError
     cmp rax,rcx
-    jne Success
+    jne @f
         
     match , Titled
         
@@ -561,10 +560,10 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.HTTPError]
         
-    Success:
+    @@:
     mov rcx,Virtual.UEFI.StatusCodes.Success
     cmp rax,rcx
-    jne Exit
+    jne @f
         
     match , Titled
         
@@ -578,6 +577,6 @@ macro GetStatusCode Titled
                     InstancePointer,0, \
                     Address,[Data.UEFI.StatusCodeMessages.Success]
         
-    Exit:
+    @@:
     
 end macro

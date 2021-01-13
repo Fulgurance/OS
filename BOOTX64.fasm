@@ -1,3 +1,4 @@
+include "FASMG/macro/@@.inc"
 include "FASMG/format/format.inc"
 
 format PE64 EFI
@@ -26,7 +27,7 @@ mov rax,[Data.UEFI.GetMemoryMap.MemoryMapSize]
 add qword [Data.UEFI.GetMemoryMap.MemoryMapSize],rax
 
 Code.UEFI.Call BootServices,BootServices,AllocatePool,3, \
-        Value,MemoryType.LoaderData, \
+        Value,Virtual.UEFI.MemoryTypes.LoaderData, \
         Value,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
         Address,[Data.UEFI.GetMemoryMap.MemoryMapAddress]
 

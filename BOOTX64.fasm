@@ -13,40 +13,40 @@ include "Code/Code.fasm"
 Bootx64:
 Code.UEFI.Initialize
 
-;Code.UEFI.Call ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
-        ;InstancePointer
+Code.UEFI.Call ConOut,SimpleTextOutputProtocol,ClearScreen,1, \
+        InstancePointer
 
-;Code.UEFI.GetStatusCode [text1]
+Code.UEFI.GetStatusCode [text1]
         
-;Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
-        ;Address,[Data.UEFI.GetMemoryMap.MemoryMapSize]
+Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapSize]
 
-;Code.UEFI.GetStatusCode [text2]
+Code.UEFI.GetStatusCode [text2]
         
-;mov rax,[Data.UEFI.GetMemoryMap.MemoryMapSize]
-;add qword [Data.UEFI.GetMemoryMap.MemoryMapSize],rax
+mov rax,[Data.UEFI.GetMemoryMap.MemoryMapSize]
+add qword [Data.UEFI.GetMemoryMap.MemoryMapSize],rax
 
-;Code.UEFI.Call BootServices,BootServices,AllocatePool,3, \
-        ;Value,Virtual.UEFI.MemoryTypes.LoaderData, \
-        ;Value,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
-        ;Address,[Data.UEFI.GetMemoryMap.MemoryMapAddress]
+Code.UEFI.Call BootServices,BootServices,AllocatePool,3, \
+        Value,Virtual.UEFI.MemoryTypes.LoaderData, \
+        Value,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapAddress]
 
-;Code.UEFI.GetStatusCode [text3]
+Code.UEFI.GetStatusCode [text3]
 
-;Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
-        ;Address,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
-        ;Value,[Data.UEFI.GetMemoryMap.MemoryMapAddress], \
-        ;Address,[Data.UEFI.GetMemoryMap.MapKey], \
-        ;Address,[Data.UEFI.GetMemoryMap.DescriptorSize], \
-        ;Address,[Data.UEFI.GetMemoryMap.DescriptorVersion]
+Code.UEFI.Call BootServices,BootServices,GetMemoryMap,5, \
+        Address,[Data.UEFI.GetMemoryMap.MemoryMapSize], \
+        Value,[Data.UEFI.GetMemoryMap.MemoryMapAddress], \
+        Address,[Data.UEFI.GetMemoryMap.MapKey], \
+        Address,[Data.UEFI.GetMemoryMap.DescriptorSize], \
+        Address,[Data.UEFI.GetMemoryMap.DescriptorVersion]
 
-;Code.UEFI.GetStatusCode [text2]
+Code.UEFI.GetStatusCode [text2]
 
 Code.UEFI.Call ConOut,SimpleTextOutputProtocol,OutputString,2, \
         InstancePointer,0, \
         Address,[text4]
         
-;Code.UEFI.GetStatusCode [text4]
+Code.UEFI.GetStatusCode [text4]
 
 jmp $
 

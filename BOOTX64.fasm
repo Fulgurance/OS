@@ -1,4 +1,5 @@
 include "FASMG/macro/@@.inc"
+include "FASMG/encoding/utf8.inc"
 include "FASMG/format/format.inc"
 
 format pe64 efi
@@ -54,7 +55,7 @@ section '.data' data readable writeable
 
 include "Data/Data.fasm"
 
-text1: dw "UEFI ClearScreen:",0xD,0xA,0x0
-text2: dw "UEFI GetMemoryMap:",0xD,0xA,0x0
-text3: dw "UEFI AllocatePool:",0xD,0xA,0x0
-text4: dw "UEFI OutputString:",0xD,0xA,0x0
+text1: du "UEFI ClearScreen:",0xD,0xA,0x0
+text2: du "UEFI GetMemoryMap:",0xD,0xA,0x0
+text3: du "UEFI AllocatePool:",0xD,0xA,0x0
+text4: du "UEFI OutputString:",0xD,0xA,0x0
